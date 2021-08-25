@@ -24,19 +24,11 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	// Pending orders
-	public List<Order> getPending() {
-		return orderRepository.findByOrderStatus("PENDING");
-	}
+	// Orders by status
+	public List<Order> getByStatus(String status) {
 
-	// Completed orders
-	public List<Order> getcompleted() {
-		return orderRepository.findByOrderStatus("COMPLETED");
-	}
-
-	// Cancelled orders
-	public List<Order> getCancelled() {
-		return orderRepository.findByOrderStatus("CANCELLED");
+		System.out.println(status);
+		return orderRepository.findByOrderStatus(status);
 	}
 
 	// User Orders
