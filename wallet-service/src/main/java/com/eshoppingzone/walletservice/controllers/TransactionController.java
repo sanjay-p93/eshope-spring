@@ -16,12 +16,14 @@ public class TransactionController {
 	private TransactionService transactionService;
 
 	@GetMapping("/complete/{txnId}")
-	public void complete(@PathVariable String txnId) {
+	public String complete(@PathVariable String txnId) {
 		transactionService.completeTransaction(txnId);
+		return "ok complted";
 	}
 
 	@GetMapping("/refund/{txnId}")
-	public void findById(@PathVariable String txnId) {
+	public String findById(@PathVariable String txnId) {
 		transactionService.refundTransaction(txnId);
+		return "ok refunded";
 	}
 }
