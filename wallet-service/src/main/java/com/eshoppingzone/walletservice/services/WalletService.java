@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eshoppingzone.walletservice.models.Topup;
@@ -51,7 +53,7 @@ public class WalletService {
 	}
 
 	// Transferring from source wallet and initiating transaction
-	public void pay(Transaction transaction) {
+	public ResponseEntity<String> pay(Transaction transaction) {
 		Optional<Wallet> SOURCEWALLET = this.findById(transaction.getSource());
 		if (SOURCEWALLET.isPresent()) {
 			Wallet sourcewallet = SOURCEWALLET.get();
@@ -62,12 +64,13 @@ public class WalletService {
 				String txnId = transactionService.initiateTransaction(transaction);
 				sourcewallet.addPendingTransaction(txnId);
 				this.save(sourcewallet);
+				return ResponseEntity.ok().body(txnId);
 
 			} else {
-				// not enough balance for transaction.
+				return ResponseEntity.badRequest().body("Wallet balance insufficient.");
 			}
 		} else {
-			// no user wallet found.
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wallet not found.");
 		}
 	}
 

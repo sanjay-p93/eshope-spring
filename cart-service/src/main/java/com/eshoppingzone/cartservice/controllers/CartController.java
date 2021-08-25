@@ -3,6 +3,7 @@ package com.eshoppingzone.cartservice.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eshoppingzone.cartservice.exceptions.WalletException;
 import com.eshoppingzone.cartservice.models.Cart;
 import com.eshoppingzone.cartservice.models.CheckoutDetails;
 import com.eshoppingzone.cartservice.models.WrapperItemCount;
@@ -43,7 +45,6 @@ public class CartController {
 
 	@PostMapping("/updateitemquantity")
 	public void updateItemQuantity(@RequestBody WrapperItemCount wrapper, BindingResult result) {
-		System.out.println(result);
 		cartService.updateItemQuantity(wrapper);
 	}
 
@@ -55,7 +56,8 @@ public class CartController {
 
 	// todo
 	@PostMapping("/checkout")
-	public void checkout(@PathVariable CheckoutDetails checkoutDetails) {
-		// cartService.checkout(checkoutDetails);
+	public ResponseEntity<String> checkout(@RequestBody CheckoutDetails checkoutDetails, BindingResult result)
+			throws WalletException {
+		return cartService.checkout(checkoutDetails);
 	}
 }

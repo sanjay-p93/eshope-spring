@@ -1,14 +1,9 @@
-package com.eshoppingzone.walletservice.models;
+package com.eshoppingzone.cartservice.models;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "Transactions")
 public class Transaction {
 
-	@Id
 	private String id;
 	private String source;
 	private String destination;

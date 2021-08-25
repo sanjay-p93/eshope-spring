@@ -2,16 +2,16 @@ package com.eshoppingzone.cartservice.models;
 
 public class CheckoutDetails {
 
-	private String cartId;
+	private String userId;
 	private String paymentType;
 	private Address address;
 
-	public String getCartId() {
-		return cartId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setCartId(String cartId) {
-		this.cartId = cartId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPaymentType() {

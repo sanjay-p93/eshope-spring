@@ -19,6 +19,17 @@ public class Order {
 	private String paymentType;
 	private String transactionId;
 
+	public Order(Cart cart, CheckoutDetails checkoutDetails) {
+		this.id = "";
+		this.userId = cart.getUserId();
+		this.items = cart.getItems();
+		this.totalPrice = cart.getTotalPrice();
+		this.address = checkoutDetails.getAddress();
+		this.paymentType = checkoutDetails.getPaymentType();
+		this.orderStatus = "";
+
+	}
+
 	public String getId() {
 		return id;
 	}

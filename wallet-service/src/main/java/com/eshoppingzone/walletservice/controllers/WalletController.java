@@ -3,6 +3,7 @@ package com.eshoppingzone.walletservice.controllers;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +41,7 @@ public class WalletController {
 
 
 	@PostMapping("/pay")
-	public void intiateTransaction(@RequestBody Transaction transaction, BindingResult result) {
-		walletService.pay(transaction);
+	public ResponseEntity<String> intiateTransaction(@RequestBody Transaction transaction, BindingResult result) {
+		return walletService.pay(transaction);
 	}
 }
