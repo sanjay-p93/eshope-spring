@@ -1,0 +1,13 @@
+.example-card {
+  max-width: 350px;
+  max-height: 450px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.list{
+    justify-content: space-around;
+}
+.action{
+    padding: 0px;
+}

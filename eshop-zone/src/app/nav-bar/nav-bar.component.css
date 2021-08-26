@@ -1,0 +1,23 @@
+.navbar{
+    justify-content: space-between;
+}
+span{
+    padding-right: 1rem;
+}
+.app-name{
+    font-size: larger;
+}
+.nav-option{
+    font-size: medium;
+}
+.nav-option:hover{
+    color: rgb(179, 177, 177);
+}
+
+.nav-icon{
+    vertical-align: text-top;
+    text-align: center
+}
+.nav-icon:hover{
+    color: rgb(179, 177, 177);
+}
