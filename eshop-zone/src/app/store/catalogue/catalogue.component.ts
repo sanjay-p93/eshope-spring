@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CatalogueService } from 'src/app/catalogue.service';
+import { Product } from 'src/app/models/product';
+import { CatalogueService } from 'src/app/services/catalogue.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -10,7 +11,19 @@ export class CatalogueComponent implements OnInit {
 
   constructor(private catalogueService: CatalogueService) { }
 
+  products: Product[] = [];
+
+  getProducts(filter :string): void {
+    this.catalogueService.getProducts(filter)
+      .subscribe(data => this.products = data);
+  }
+
+  onClickLog(): void {
+    console.log(this.products);
+  }
+
   ngOnInit(): void {
+    this.getProducts("products");
   }
 
 }
