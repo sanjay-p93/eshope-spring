@@ -21,6 +21,8 @@ import com.eshoppingzone.cartservice.models.WrapperNewCartItem;
 import com.eshoppingzone.cartservice.models.WrapperUserIdItemId;
 import com.eshoppingzone.cartservice.services.CartService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/cart")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -30,34 +32,39 @@ public class CartController {
 	private CartService cartService;
 
 	@GetMapping("/get/{userId}")
+	@ApiOperation(value = "Find cart by user Id", notes = "Provide user Id to look up specific cart", response = Cart.class)
 	public Optional<Cart> findByUserId(@PathVariable String userId) {
 		return cartService.findByUserId(userId);
 	}
 
 	@PostMapping("/add")
+	@ApiOperation(value = "Add cart for a user", notes = "Provide a cart model")
 	public void addnew(@RequestBody Cart cart, BindingResult result) {
 		cartService.add(cart);
 	}
 
 	@PostMapping("/addNewitem")
+	@ApiOperation(value = "Add new item to a cart", notes = "Provide a user id and cart item to add item to specific user cart")
 	public void addNewItem(@RequestBody WrapperNewCartItem wrapper, BindingResult result) {
 		System.out.println(result);
 		cartService.addNewItem(wrapper);
 	}
 
 	@PostMapping("/updateitemquantity")
+	@ApiOperation(value = "Update item quantity in a cart", notes = "Provide a user id, item id and new qantity to update quantity of the cart item")
 	public void updateItemQuantity(@RequestBody WrapperItemCount wrapper, BindingResult result) {
 		cartService.updateItemQuantity(wrapper);
 	}
 
 	@PostMapping("/deleteItem")
+	@ApiOperation(value = "Delete item in a cart", notes = "Provide a user id and item id to delete cart item")
 	public void deleteItem(@RequestBody WrapperUserIdItemId wrapper, BindingResult result) {
 		System.out.println(result);
 		cartService.deleteItem(wrapper);
 	}
 
-	// todo
 	@PostMapping("/checkout")
+	@ApiOperation(value = "Checkout a cart user cart and place order", notes = "Provide a user id, payment type and delivery address to place an order", response = String.class)
 	public ResponseEntity<String> checkout(@RequestBody CheckoutDetails checkoutDetails, BindingResult result)
 			throws WalletException {
 		return cartService.checkout(checkoutDetails);

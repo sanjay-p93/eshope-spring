@@ -6,16 +6,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Document(collection = "Products")
+@ApiModel(description = "Deatils about the product")
 public class Product {
 
 	@Id
+	@ApiModelProperty(notes = "The unique id of the product")
 	private String id;
 	@TextIndexed
+	@ApiModelProperty(notes = "Name of the product")
 	private String name;
+	@ApiModelProperty(notes = "Details about the product")
 	private String description;
+	@ApiModelProperty(notes = "Product cost")
 	private BigDecimal price;
+	@ApiModelProperty(notes = "Product category")
 	private String category;
+	@ApiModelProperty(notes = "Image of product")
 	private String imageUrl;
 
 	public String getId() {

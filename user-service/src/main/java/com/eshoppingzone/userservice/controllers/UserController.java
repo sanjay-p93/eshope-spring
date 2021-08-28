@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eshoppingzone.userservice.models.User;
 import com.eshoppingzone.userservice.services.UserService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,11 +26,13 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping("/user/{email}")
+	@ApiOperation(value = "Find user by email", notes = "Provide an email id to look up specific user", response = User.class)
 	public Optional<User> findById(@PathVariable String email) {
 		return userService.getUserByEmail(email);
 	}
 
 	@PostMapping("/save_user")
+	@ApiOperation(value = "Add a new user", notes = "Provide userdetails to add a new user")
 	public void addnew(@RequestBody User user, BindingResult result) {
 		userService.save(user);
 	}

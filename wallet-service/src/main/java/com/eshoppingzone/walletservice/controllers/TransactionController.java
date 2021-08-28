@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.eshoppingzone.walletservice.services.TransactionService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/transaction")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,12 +20,14 @@ public class TransactionController {
 	private TransactionService transactionService;
 
 	@GetMapping("/complete/{txnId}")
+	@ApiOperation(value = "Complete a transaction by Id", notes = "Provide id to complete a specific transaction", response = String.class)
 	public String complete(@PathVariable String txnId) {
 		transactionService.completeTransaction(txnId);
 		return "ok complted";
 	}
 
 	@GetMapping("/refund/{txnId}")
+	@ApiOperation(value = "Refund a transaction by Id", notes = "Provide id to refund a specific transaction", response = String.class)
 	public String findById(@PathVariable String txnId) {
 		transactionService.refundTransaction(txnId);
 		return "ok refunded";
