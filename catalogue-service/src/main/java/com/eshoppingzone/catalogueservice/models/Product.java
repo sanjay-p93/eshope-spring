@@ -28,6 +28,20 @@ public class Product {
 	@ApiModelProperty(notes = "Image of product")
 	private String imageUrl;
 
+	public Product() {
+		super();
+	}
+
+	public Product(String id, String name, String description, BigDecimal price, String category, String imageUrl) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+		this.imageUrl = imageUrl;
+	}
+
 	public String getId() {
 		return id;
 	}

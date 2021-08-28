@@ -1,4 +1,4 @@
-package com.eshoppingzone.catalogueservice.repositories;
+package com.eshoppingzone.catalogueservice.dao;
 
 import java.util.List;
 
