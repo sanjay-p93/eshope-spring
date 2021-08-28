@@ -32,8 +32,8 @@ public class CartService {
 	@Autowired
 	private OrderService orderService;
 
-
-	RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	RestTemplate restTemplate;
 
 	// Find cart
 	public Optional<Cart> findByUserId(String userId) {
@@ -167,7 +167,7 @@ public class CartService {
 		transaction.setDestination("eshope");
 
 		try {
-			String uri = "http://localhost:8085/wallet/pay";
+			String uri = "http://WALLET-SERVICE/wallet/pay";
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, transaction, String.class);
 			String body = response.getBody();
 			return body;

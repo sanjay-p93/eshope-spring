@@ -4,7 +4,9 @@ import java.util.Collections;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -19,6 +21,12 @@ public class CartServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CartServiceApplication.class, args);
+	}
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
 	}
 
 	@Bean

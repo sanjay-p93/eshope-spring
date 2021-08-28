@@ -16,7 +16,8 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
-	RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	RestTemplate restTemplate;
 
 
 	// All orders
@@ -55,7 +56,7 @@ public class OrderService {
 		if (ORDER.isPresent()) {
 			Order order = ORDER.get();
 			if (order.getPaymentType().equals("WALLET")) {
-				String uri = "http://localhost:8085/transaction/complete/" + order.getTransactionId();
+				String uri = "http://WALLET-SERVICE/transaction/complete/" + order.getTransactionId();
 				String msg = restTemplate.getForObject(uri, String.class);
 				System.out.println(msg);
 			}
@@ -72,7 +73,7 @@ public class OrderService {
 		if (ORDER.isPresent()) {
 			Order order = ORDER.get();
 			if (order.getPaymentType().equals("WALLET")) {
-				String uri = "http://localhost:8085/transaction/refund/" + order.getTransactionId();
+				String uri = "http://WALLET-SERVICE/transaction/refund/" + order.getTransactionId();
 				String msg = restTemplate.getForObject(uri, String.class);
 				System.out.println(msg);
 			}
