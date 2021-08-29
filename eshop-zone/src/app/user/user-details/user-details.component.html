@@ -1,0 +1,90 @@
+<div class="container-fluid shadow p-3 mb-5 bg-white rounded">
+    
+    <div class="col-md-12">
+        <div class="row">
+            <div class="form-group col-md-12 "><h2>Profile</h2></div>
+        </div>
+        <form [formGroup]="userForm" >
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label text-secondary">Name</label>
+                    <input [class.is-invalid]="userForm.get('name')?.invalid && userForm.get('name')?.touched " 
+                        formControlName="name" type="text" class="form-control" >
+                    <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                        <small *ngIf="userForm.get('name')?.errors?.required" class="text-danger">Name is required</small>
+                        <small *ngIf="userForm.get('name')?.errors?.maxlength" class="text-danger">Max 25 characters allowed</small>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label text-secondary">Email</label>
+                    <input formControlName="email" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label text-secondary">Password</label>
+                    <input formControlName="password" class="form-control" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label  class="control-label text-secondary">Confirm Password</label>
+                    <input [class.is-invalid]="userForm.errors?.passwordMissMatch && (userForm.touched || userForm.dirty)" formControlName="confimPassword" class="form-control" >
+                    <small *ngIf="userForm.errors?.passwordMissMatch && (userForm.touched || userForm.dirty)" 
+                        class="text-danger">Passwords does not match</small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label  class="control-label text-secondary">Phone</label>
+                    <input formControlName="phone" class="form-control" >
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div formGroupName="address">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <h3 class="text-secondary">Address</h3>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label text-secondary">Building</label>
+                        <input formControlName="building" class="form-control" >
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="control-label text-secondary">Landmark</label>
+                        <input formControlName="landmark" class="form-control" >
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label text-secondary">Street</label>
+                        <input formControlName="street" class="form-control" >
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label  class="control-label text-secondary">City</label>
+                        <input formControlName="city" class="form-control" >
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label  class="control-label text-secondary">Zip</label>
+                        <input formControlName="zip" class="form-control" >
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+     
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <button (click)="save()"type="submit" class="btn btn-dark">Save</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

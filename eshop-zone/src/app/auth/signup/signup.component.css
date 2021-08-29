@@ -1,0 +1,25 @@
+.form-container {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; 
+    padding: 10px;
+}
+
+.sign-head{
+    background-color:#212121;
+    color: white;
+    margin: -10px;
+}
+.sign-head h1{
+    margin: 0px;
+    font-size: xxx-large;
+    font-family: Copperplate,fantasy;
+}
+
+
+.form-control.is-invalid{
+    background-image: none;
+}
+.centered{
+    margin: 1rem auto;
+}

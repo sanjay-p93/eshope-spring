@@ -1,6 +1,6 @@
-<div class="list">
-    <mat-card class="example-card"  *ngFor="let product of products; let i=index">
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<div class="list col-12">
+    <mat-card class="card col-lg-4"  *ngFor="let product of products; let i=index" [class.mat-elevation-z3]="true">
+        <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu">
         <mat-card-content>
             <mat-card-title>{{product.name}}</mat-card-title>
             <mat-card-subtitle>{{product.category}}</mat-card-subtitle>

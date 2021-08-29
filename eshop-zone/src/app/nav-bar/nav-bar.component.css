@@ -5,7 +5,8 @@ span{
     padding-right: 1rem;
 }
 .app-name{
-    font-size: larger;
+    font-size: xxx-large;
+    font-family: Copperplate,fantasy;
 }
 .nav-option{
     font-size: medium;
