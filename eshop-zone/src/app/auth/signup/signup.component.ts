@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 
 @Component({
@@ -10,12 +11,12 @@ import { PasswordValidator } from 'src/app/shared/password.validator';
 export class SignupComponent implements OnInit {
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private navBarService:NavBarService) { }
 
   signupForm!: FormGroup;
 
   setUserDetails(){
-    this.signupForm = this.fb.group({
+    this.signupForm = this.formBuilder.group({
       name:             ["",[Validators.required,Validators.maxLength(25)]],
       password :        ["",Validators.required],
       confimPassword :  ["",Validators.required],
@@ -32,5 +33,6 @@ export class SignupComponent implements OnInit {
   }
   ngOnInit(): void {
     this.setUserDetails();
+    this.navBarService.hideNav();
   }
 }

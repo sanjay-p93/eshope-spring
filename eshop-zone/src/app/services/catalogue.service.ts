@@ -12,7 +12,7 @@ export class CatalogueService {
   private catalogueUrl = 'http://localhost:8080/catalogue/';
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
   getProducts(filter : string): Observable<Product[]> {

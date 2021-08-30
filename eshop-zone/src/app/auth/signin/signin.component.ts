@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { retry } from 'rxjs/operators';
+import { JWTRequest } from 'src/app/models/JWTRequest';
+import { AuthService } from 'src/app/services/auth.service';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 
 @Component({
   selector: 'app-signin',
@@ -8,14 +13,44 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  constructor( 
+    private formBuilder: FormBuilder, 
+    private navBarService:NavBarService,
+    private authService:AuthService,
+    private router: Router
 
-  signinForm = new FormGroup({
-    name: new FormControl(""),
-    password : new FormControl("")
-  });
+    ) { }
+
+  signinForm!: FormGroup;
+
+  setUserDetails(){
+    this.signinForm = this.formBuilder.group({
+      email:             ["",Validators.required],
+      password :        ["",Validators.required],
+    });
+
+  }
+  signIn(){
+
+    if(!this.signinForm.valid) {
+      this.signinForm.markAllAsTouched();
+      return;
+    }
+    const formValue = this.signinForm.value;
+    const jwtReq : JWTRequest ={username:formValue["email"],password:formValue["password"]};
+    this.authService.signIn(jwtReq).subscribe(result=>{
+       if(result.jwtToken!==""){
+        localStorage.setItem('eshopZoneToken', result.jwtToken);
+        this.router.navigate(['home']);
+        
+       }
+    });
+  }
+
 
   ngOnInit(): void {
+    this.navBarService.hideNav();
+    this.setUserDetails();
   }
 
 }

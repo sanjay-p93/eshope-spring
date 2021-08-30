@@ -1,11 +1,8 @@
 .card {
   max-width: 275px;
   max-height: 390px;
-  margin: 10px;
+  margin: 10px auto;
   display: inline-block;
-}
-.card:hover {
- background-color:rgb(32, 32, 34);
 }
 img {
   object-fit: cover;
@@ -13,7 +10,10 @@ img {
   max-height: 200px;
 }
 .list{
-    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap ;
+    align-content: flex-start;
+    justify-items: left;
 }
 .action{
     vertical-align: middle;

@@ -23,3 +23,17 @@
 .centered{
     margin: 1rem auto;
 }
+
+
+.auth-card{
+    width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 8em;
+}
+
+.form-head{
+
+    margin-left: 24px;
+    margin-top: 2em;
+}
