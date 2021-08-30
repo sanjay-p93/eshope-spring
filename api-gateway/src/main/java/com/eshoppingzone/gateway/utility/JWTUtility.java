@@ -53,6 +53,7 @@ public class JWTUtility implements Serializable {
 	// generate token for user
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
+		claims.put("test1", "hello123");
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 

@@ -41,22 +41,17 @@ public class controller {
 	@PostMapping("/authenticate")
 	public JWTRespone authenticate(@RequestBody JWTRequest jwtRequest) throws Exception {
 
-		System.out.println("-----------------------done --------------");
-
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword())
 
 			);
-			System.out.println("-----------------------done --------------");
 		} catch (BadCredentialsException e) {
 			throw new Exception("INVALID CREDENTIALS", e);
 		}
 
 		final UserDetails userDetails = userservice.loadUserByUsername(jwtRequest.getUsername());
-
 		final String token = jwtUtility.generateToken(userDetails);
-
 		return new JWTRespone(token);
 	}
 }

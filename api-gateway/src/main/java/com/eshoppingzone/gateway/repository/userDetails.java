@@ -8,7 +8,6 @@ import com.eshoppingzone.gateway.model.user;
 
 public interface userDetails extends MongoRepository<user, String> {
 
-	Optional<user> findByUsername(String username);
 
-	Optional<user> findByPassword(String string);
+	Optional<user> findOneByEmail(String username);
 }

@@ -9,7 +9,7 @@ import { catchError} from 'rxjs/operators';
 })
 export class CatalogueService {
 
-  private catalogueUrl = 'http://localhost:8083/catalogue/';
+  private catalogueUrl = 'http://localhost:8080/catalogue/';
 
   constructor(
     private http: HttpClient,

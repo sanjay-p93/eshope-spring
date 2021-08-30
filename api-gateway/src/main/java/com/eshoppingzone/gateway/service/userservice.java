@@ -24,17 +24,17 @@ public class userservice implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.out.println(username);
-		Optional<user> user = details.findByUsername(username);
-		System.out.println(user);
+		Optional<user> user = details.findOneByEmail(username);
 
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found");
 		}
+		user currentUser = user.get();
 
-		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USER"));
+		// set roles
+		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority(currentUser.getRole()));
 
-		return new User(user.get().getUsername(), user.get().getPassword(), authorities);
-		// return new User("user","user",new ArrayList<>());
+		// return spring security user instance
+		return new User(currentUser.getEmail(), currentUser.getPassword(), authorities);
 	}
 }
