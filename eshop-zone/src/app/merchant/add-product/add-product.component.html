@@ -1,53 +1,51 @@
 <div class="container-fluid">
     
-    <div class="col-md-8">
-        <div class="row">
-            <div class="form-group col-md-6"><h2>Add New Product</h2></div>
-        </div>
-        
-        <form >
+    <div class="col-lg-6 center-item">
+        <div class="col-12 mt-5 mb-2 list-head">
+            <h1 class="head">Add Product</h1>
+            
+                         
+        </div>   
+        <form [formGroup]="productForm"  (submit)="add()">
             <div  class="text-danger"></div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label">Name</label>
-                    <input type="text" class="form-control" required>
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label">description</label>
-                    <input class="form-control" required>
-                    <span class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label  class="control-label">Price</label>
-                    <input class="form-control" step="1" min="0" required>
-                    <span class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label  class="control-label">Category</label>
-                    <input class="form-control" required>
-                    <span class="text-danger"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label"></label>
-                    <div class="custom-file">
-                        <input class="form-control custom-file-input" />
-                        <label class="custom-file-label">Choose file</label>
+                <div class="form-group col-md-10">
+                    <label class="control-label text-secondary">Name</label>
+                    <input [class.is-invalid]="productForm.get('name')?.invalid && productForm.get('name')?.touched " 
+                        formControlName="name" type="text" class="form-control" >
+                    <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+                        <small *ngIf="productForm.get('name')?.errors?.required" class="text-danger">Name is required</small>
+                        <small *ngIf="productForm.get('name')?.errors?.maxlength" class="text-danger">Max 25 characters allowed</small>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-1 margin-r40">
-                    <input type="submit" value="Add Item" class="btn btn-primary btn-color" />
+                <div class="form-group col-md-10">
+                    <label class="control-label text-secondary">Description</label>
+                    <input [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched " 
+                        formControlName="description" type="text" class="form-control" >
+                    <small *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">Description is required</small>
                 </div>
-                <div class="form-group col-md-1">
-                    <input type="button" value="Cancel" class="btn btn-secondary" />
+                <div class="form-group col-md-10">
+                    <label class="control-label text-secondary">price</label>
+                    <input [class.is-invalid]="productForm.get('price')?.invalid && productForm.get('price')?.touched " 
+                        formControlName="price" type="text" class="form-control" >
+                    <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">price is required</small>
                 </div>
-            </div>
+                <div class="form-group col-md-10">
+                    <label class="control-label text-secondary">category</label>
+                    <input [class.is-invalid]="productForm.get('category')?.invalid && productForm.get('category')?.touched " 
+                        formControlName="category" type="text" class="form-control" >
+                    <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="text-danger">Namcategorye is required</small>
+                </div>
+                <div class="form-group col-md-10">
+                    <label class="control-label text-secondary">imageUrl</label>
+                    <input [class.is-invalid]="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched " 
+                        formControlName="imageUrl" type="text" class="form-control" >
+                    <small *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched" class="text-danger">imageUrl is required</small>
+                </div>
+
+                <div class="form-group col-md-10 ">
+                    <button type="submit" class="btn btn-dark mr-2">&nbsp; Add &nbsp;</button>
+                    <input type="button" routerLink="/productlist" class="btn btn-light" value="Cancel"/>
+                </div>
         </form>
     </div>
 </div>

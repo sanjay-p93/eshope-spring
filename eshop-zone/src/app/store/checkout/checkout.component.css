@@ -1,3 +1,13 @@
 mat-stepper{
+    padding-top: 30px;
     height: 100vh;
+}
+
+.btn{
+    margin-right: 10px;
+}
+
+.radio-m{
+    margin-top: 55px;
+    margin-bottom: 20px;
 }

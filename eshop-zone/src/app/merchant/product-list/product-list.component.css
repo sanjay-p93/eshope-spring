@@ -1,0 +1,16 @@
+.list-head{
+    display: flex;
+    justify-content: space-between;
+}
+.head{
+    display: inline-block;
+}
+.add{
+    height: 40px;
+}
+
+.icon {
+    font-size: 18px;
+    line-height: 1;
+    min-width: 16px;
+}

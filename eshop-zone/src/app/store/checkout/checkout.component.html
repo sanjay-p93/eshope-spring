@@ -1,36 +1,66 @@
-
 <mat-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+  <mat-step [stepControl]="addressForm">
+    <form [formGroup]="addressForm">
+      <ng-template matStepLabel>Enter delivery address</ng-template>
+
+              <div class="form-group col-md-6">
+                  <label class="control-label text-secondary">Building</label>
+                  <input  formControlName="building" class="form-control" >
+                  <span class="text-danger"></span>
+              </div>
+              <div class="form-group col-md-6">
+                  <label  class="control-label text-secondary">Landmark</label>
+                  <input  formControlName="landmark" class="form-control" >
+                  <span class="text-danger"></span>
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="control-label text-secondary">Street</label>
+                  <input formControlName="street" class="form-control" >
+                  <span class="text-danger"></span>
+              </div>
+              <div class="form-group col-md-6">
+                  <label  class="control-label text-secondary">City</label>
+                  <input  formControlName="city" class="form-control" >
+                  <span class="text-danger"></span>
+              </div>
+              <div class="form-group col-md-3">
+                  <label  class="control-label text-secondary">Zip</label>
+                  <input  formControlName="zip" class="form-control" >
+                  <span class="text-danger"></span>
+              </div>
+      <div class="col-6">
+        <button class="btn btn-dark"  matStepperNext>Next</button>
       </div>
-    </mat-step>
-  </mat-stepper>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="paymentForm" label="Payment Methord">
+    <form [formGroup]="paymentForm">
+
+      <mat-radio-group aria-label="Select an option" formControlName="paymentType">
+        <div class="row radio-m">
+            <div class="form-group col-md-3">
+              <mat-radio-button value="COD" >COD</mat-radio-button>
+          </div>
+          <div class="form-group col-md-3">
+              <mat-radio-button value="WALLET">WALLET</mat-radio-button>
+          </div>
+
+        </div>
+
+      </mat-radio-group>
+   
+      <div>
+        <button class="btn btn-dark"  matStepperPrevious>Back</button>
+         <button class="btn btn-dark"  matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="save()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

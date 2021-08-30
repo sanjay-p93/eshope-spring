@@ -8,6 +8,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 const material =
@@ -19,7 +23,12 @@ const material =
     MatFormFieldModule,
     MatBadgeModule,
     MatStepperModule,
-    MatInputModule
+    MatInputModule,
+    MatRadioModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
+    
   ];
 
 @NgModule({

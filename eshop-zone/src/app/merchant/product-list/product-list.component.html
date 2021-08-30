@@ -1,1 +1,37 @@
-<p>product-list works!</p>
+
+
+<div class="col-lg-12 center-item">
+    <div class="col-12 mt-5 mb-2 list-head">
+        <h1 class="head">Orders</h1>
+        <button routerLink="/add" class="btn btn-dark add"><mat-icon>add</mat-icon></button>
+        
+                     
+    </div>   
+
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th scope="col-1">#</th>
+        <th scope="col-3">Name</th>
+        <th scope="col-3">Description</th>
+        <th scope="col-1">Price</th>
+        <th scope="col-2">Category</th>
+        <th scope="col-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+        <td>@mdo</td>
+        <td>
+          <button routerLink="/edit/{{id}}" class="btn btn-dark btn-sm mr-3 icon"><mat-icon [inline]="true">create</mat-icon></button>
+          <button (click)="delete('')" class="btn btn-dark btn-sm icon"><mat-icon [inline]="true">delete</mat-icon></button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+</div>

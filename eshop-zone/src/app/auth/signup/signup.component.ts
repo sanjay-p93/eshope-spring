@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 
 @Component({
@@ -16,10 +16,10 @@ export class SignupComponent implements OnInit {
 
   setUserDetails(){
     this.signupForm = this.fb.group({
-      name: ["",[Validators.required,Validators.maxLength(25)]],
-      password : ["",Validators.required],
-      confimPassword : ["",Validators.required],
-      email : ["",[Validators.required,Validators.email]],
+      name:             ["",[Validators.required,Validators.maxLength(25)]],
+      password :        ["",Validators.required],
+      confimPassword :  ["",Validators.required],
+      email :           ["",[Validators.required,Validators.email]],
     }, { validators: PasswordValidator });
 
   }
