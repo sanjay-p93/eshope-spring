@@ -12,8 +12,9 @@ import { StoreModule } from './store/store.module';
 import { MerchantModule } from './merchant/merchant.module';
 import { UserModule } from './user/user.module';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
+import { HeaderIntercepterService } from './services/header-intercepter.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeaderIntercepterService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

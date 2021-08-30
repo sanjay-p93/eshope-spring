@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.eshoppingzone.gateway.filter.JWTFilter;
 import com.eshoppingzone.gateway.service.userservice;
 
-//@CrossOrigin(origins = "http://localhost:4200")
+
 @Configuration
 @EnableWebSecurity
 public class securityConfig extends WebSecurityConfigurerAdapter {
