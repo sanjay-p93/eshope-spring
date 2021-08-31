@@ -19,7 +19,14 @@ public class UserService {
 		return userRepository.findOneByEmail(email);
 	}
 
-	public void save(User user) {
-		userRepository.save(user);
+	public User save(User user) throws Exception {
+		Optional<User> existingUser = this.getUserByEmail(user.getEmail());
+		if (existingUser.isEmpty()) {
+			user.setRole("CUSTOMER");
+			return userRepository.save(user);
+		} else {
+			throw new Exception("User with email " + user.getEmail() + " already exist.");
+
+		}
 	}
 }

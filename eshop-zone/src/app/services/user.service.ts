@@ -14,9 +14,7 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huQDEyMyIsImV4cCI6MTYzMDQwODg5NCwidGVzdDEiOiJoZWxsbzEyMyIsImlhdCI6MTYzMDM5MDg5NH0.nGn4B8kMhQps19P2mqu3sOiNhdjd7HfUqJmSCrSHeVxGu-3gLBH19SMPWN3Zx1J8ESGSgRe5dD1itmwBi_2VIQ' })
   };
-
-
-
+  
   constructor(private http: HttpClient) { }
 
 

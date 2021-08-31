@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Injectable } from '@angular/core';
 import { Observable ,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { JWTRequest } from '../models/JWTRequest';
 import { JWTRespone } from '../models/JWTRespone';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ import { JWTRespone } from '../models/JWTRespone';
 export class AuthService {
 
   private signinUrl = 'http://localhost:8080/gateway/authenticate';
+  private signupUrl = 'http://localhost:8080/users/save_user'; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,16 +28,28 @@ export class AuthService {
       );
   }
 
+
+  signUp(user : User): Observable<User> {
+    return this.http.post<User>(this.signupUrl,user,this.httpOptions)
+      .pipe(
+        catchError(this.handleError<User>('Sign up',undefined))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if(error.status==403){
-        alert("Invalid Cradentials");
+        alert("Invalid Cradentials",);
+      }
+      else if(typeof(error.error)=="string"){
+        alert(error.error);
       }
       else{
-        alert("Oops somthing went wrong.");
+        alert("Oops something went wrong. Try again after sometime.");
       }
-      console.error(error); 
+      console.error(error.error); 
       console.log(`${operation} failed : ${error.message}`);
+
       //returning empty result
       return of(result as T);
     };

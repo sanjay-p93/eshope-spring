@@ -31,8 +31,8 @@ public class UserController {
 
 	@PostMapping("/save_user")
 	@ApiOperation(value = "Add a new user", notes = "Provide userdetails to add a new user")
-	public void addnew(@RequestBody User user, BindingResult result) {
-		userService.save(user);
+	public User addnew(@RequestBody User user, BindingResult result) throws Exception {
+		return userService.save(user);
 	}
 
 }

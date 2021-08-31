@@ -44,7 +44,6 @@ export class SigninComponent implements OnInit {
     this.authService.signIn(jwtReq).subscribe(result=>{
         if(result.jwtToken!==""){
           localStorage.setItem('eshopZoneToken', result.jwtToken);
-          console.log(result.jwtToken);
           this.getUser(jwtReq.username);
         }
     });
