@@ -55,8 +55,8 @@ export class SigninComponent implements OnInit {
         localStorage.clear();
         return;
       }
-      localStorage.setItem('loggedUser', JSON.stringify(user));
-      localStorage.setItem('userRole', user.role);
+      localStorage.setItem('eshopZoneUser', JSON.stringify(user));
+      localStorage.setItem('eshopZoneRole', user.role);
       this.navBarService.displayNav();
       this.router.navigate(['home']);
     });

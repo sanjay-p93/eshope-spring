@@ -14,4 +14,9 @@ public class CartOrderGlobalErrorHandler {
 		return ResponseEntity.badRequest().body(e.getLocalizedMessage());
 	}
 
+	@ExceptionHandler({ Exception.class })
+	public ResponseEntity<String> notFountGlobal(Exception e) {
+		return ResponseEntity.badRequest().body(e.getLocalizedMessage());
+	}
+
 }

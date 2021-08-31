@@ -13,10 +13,16 @@ export class CatalogueService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(filter : string): Observable<Product[]> {
-    let getAllUrl: string= this.catalogueUrl+filter;
-    console.log(getAllUrl);
-     
+  getAllProducts(): Observable<Product[]> {
+    let getAllUrl: string= this.catalogueUrl+"products";   
+    return this.http.get<Product[]>(getAllUrl)
+      .pipe(
+        catchError(this.handleError<Product[]>('Catalouge retrival', []))
+      );
+  }
+
+  getByCategory(category: string): Observable<Product[]> {
+    let getAllUrl: string= this.catalogueUrl+"category/"+category;   
     return this.http.get<Product[]>(getAllUrl)
       .pipe(
         catchError(this.handleError<Product[]>('Catalouge retrival', []))

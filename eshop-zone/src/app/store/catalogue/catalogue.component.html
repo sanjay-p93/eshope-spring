@@ -1,3 +1,17 @@
+<div class="row">
+    <div class=" mt-4 mb-4 ml-4 col-lg-8">
+        <mat-chip-list aria-label="Fish selection">
+            <mat-chip (click)="getAllProducts()" color="accent" selected>All</mat-chip>
+            <mat-chip (click)="getByCategory('BOOKS')" color="accent" selected>Books </mat-chip>
+            <mat-chip (click)="getByCategory('ELECTRONICS')" color="accent" selected>Electronics</mat-chip>
+            <mat-chip (click)="getByCategory('APPAREL')" color="accent" selected>Apparel</mat-chip>
+            <mat-chip (click)="getByCategory('PERSONAL-CARE')" color="accent" selected>Personal Care</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div class="  mt-4 mb-4 ml-4  col-lg-3">
+        <!-- search-->
+    </div>
+</div>
 <div class="list col-12">
     <mat-card class="card col-lg-4"  *ngFor="let product of products; let i=index" [class.mat-elevation-z3]="true">
         <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu">
@@ -7,9 +21,12 @@
             <p>{{product.description}}</p>
         </mat-card-content>
         <mat-card-actions class="action">
-            <span>{{product.price}}</span>
-            <span>
-                <button (click)="onClickLog()" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
+            <span class="price inline-block"  (click)="onClickLog()">₹&nbsp;{{product.price}}</span>
+            <span *ngIf="!itemQtyMap.has(product.id)">
+                <button class="btn btn-success btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
+            </span>
+            <span *ngIf="itemQtyMap.has(product.id)">
+                <button (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
             </span>
         </mat-card-actions>
     </mat-card>

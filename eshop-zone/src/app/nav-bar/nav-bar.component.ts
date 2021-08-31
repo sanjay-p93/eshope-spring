@@ -10,6 +10,7 @@ export class NavBarComponent implements OnInit {
 
   constructor(private navBarService:NavBarService) { }
   isActive:boolean=true;
+  cartItemCount:number=0;
 
   setNavBar(){
     this.navBarService.isActive$.subscribe(
@@ -18,8 +19,15 @@ export class NavBarComponent implements OnInit {
 
   }
 
+  setCartItemCount(){
+    this.navBarService.cartItemCount$.subscribe(
+      cartItemCount=>this.cartItemCount=cartItemCount
+    );
+  }
+
   ngOnInit(): void {
     this.setNavBar();
+    this.setCartItemCount()
   }
 
 }

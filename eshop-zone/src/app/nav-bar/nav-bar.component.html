@@ -4,7 +4,7 @@
   <div>
       <span routerLink="/orders" class="nav-option">Orders</span>
       <span><mat-icon  routerLink="/profile" class="nav-icon">account_circle</mat-icon></span>
-      <span><mat-icon  routerLink="/cart" class="nav-icon" matBadge="1" matBadgeColor="warn" [matBadgeHidden]="false" >shopping_cart</mat-icon></span>
+      <span><mat-icon  routerLink="/cart" class="nav-icon" [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount==0" >shopping_cart</mat-icon></span>
   </div>
   
 </mat-toolbar>

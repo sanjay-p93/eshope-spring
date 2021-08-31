@@ -1,6 +1,7 @@
 package com.eshoppingzone.cartservice.models;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -14,6 +15,17 @@ public class Cart {
 	private String userId;
 	private BigDecimal totalPrice;
 	private List<CartItem> items;
+
+	public Cart() {
+		super();
+	}
+
+	public Cart(String userId, BigDecimal totalPrice, CartItem cartItem) {
+		super();
+		this.userId = userId;
+		this.totalPrice = totalPrice;
+		this.items = Arrays.asList(cartItem);
+	}
 
 	public String getId() {
 		return id;

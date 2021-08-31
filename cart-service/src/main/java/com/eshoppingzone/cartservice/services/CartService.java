@@ -40,15 +40,6 @@ public class CartService {
 		return cartRepository.findOneByUserId(userId);
 	}
 
-
-	// Add cart
-	public void add(Cart cart) {
-		List<CartItem> items = cart.getItems();
-		cart.setTotalPrice(getNewTotalPrice(items));
-		cartRepository.save(cart);
-	}
-
-
 	// Delete cart
 	public void deleteCart(String id) {
 		cartRepository.deleteById(id);
@@ -66,28 +57,28 @@ public class CartService {
 
 
 	// Add new item to cart
-	public void addNewItem(WrapperNewCartItem wrapper) {
+	public Cart addNewItem(WrapperNewCartItem wrapper) {
 
 		String userId = wrapper.getUserId();
 		CartItem cartItem = wrapper.getCartItem();
 
 		Optional<Cart> CART = this.findByUserId(userId);
-		if (CART.isPresent()) {
-			Cart cart = CART.get();
-			cart.getItems().add(cartItem);
-			List<CartItem> items = cart.getItems();
-			cart.setTotalPrice(getNewTotalPrice(items));
-			cartRepository.save(cart);
-		}
-		else {
-			// cart not found
+		if (CART.isEmpty()) {
+			Cart cart = new Cart(userId, cartItem.getPrice(), cartItem);
+			return cartRepository.save(cart);
+		} else {
+			Cart existingCart = CART.get();
+			existingCart.getItems().add(cartItem);
+			List<CartItem> items = existingCart.getItems();
+			existingCart.setTotalPrice(getNewTotalPrice(items));
+			return cartRepository.save(existingCart);
 		}
 
 	}
 
 
 	// Update item quantity
-	public void updateItemQuantity(WrapperItemCount wrapper) {
+	public Cart updateItemQuantity(WrapperItemCount wrapper) throws Exception {
 
 		String userId = wrapper.getUserId();
 		String itemId = wrapper.getItemId();
@@ -103,16 +94,16 @@ public class CartService {
 			});
 			List<CartItem> items = cart.getItems();
 			cart.setTotalPrice(getNewTotalPrice(items));
-			cartRepository.save(cart);
+			return cartRepository.save(cart);
 		}
 		else {
-			// cart not found
+			throw new Exception("Cart not found.");
 		}
 	}
 
 
 	// Delete item from cart
-	public void deleteItem(WrapperUserIdItemId wrapper) {
+	public Cart deleteItem(WrapperUserIdItemId wrapper) throws Exception {
 
 		String userId = wrapper.getUserId();
 		String itemId = wrapper.getItemId();
@@ -124,14 +115,15 @@ public class CartService {
 				cart.getItems().removeIf(item -> (item.getId().equals(itemId)));
 				List<CartItem> items = cart.getItems();
 				cart.setTotalPrice(getNewTotalPrice(items));
-				cartRepository.save(cart);
+				return cartRepository.save(cart);
 			}
 			else {
 				cartRepository.deleteById(cart.getId());
+				return null;
 			}
 		}
 		else {
-			// cart not found
+			throw new Exception("Cart not found.");
 		}
 	}
 

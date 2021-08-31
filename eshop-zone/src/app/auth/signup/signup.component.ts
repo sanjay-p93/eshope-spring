@@ -43,8 +43,8 @@ export class SignupComponent implements OnInit {
     const user  = <User>{name:formValue.name,password :formValue.password,email :formValue.email};
     this.authService.signUp(user).subscribe(result=>{
         if(result){
-          localStorage.setItem('loggedUser', JSON.stringify(result));
-          localStorage.setItem('userRole', result.role);
+          localStorage.setItem('eshopZoneUser', JSON.stringify(result));
+          localStorage.setItem('eshopZoneRole', result.role);
           this.signIn(result);
         }
     });
@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
         }
         else{
           localStorage.clear();
-          alert("Unsuccessfull login please try again.");
+          alert("You have been succesfully registered try logging in.");
           this.router.navigate(['signin']);
         }
     });

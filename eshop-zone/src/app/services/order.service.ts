@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class OrderService {
 
-  constructor() { }
+  private orderUrl = 'http://localhost:8080/cart/';
+
+
+  constructor(private http: HttpClient) { }
 }

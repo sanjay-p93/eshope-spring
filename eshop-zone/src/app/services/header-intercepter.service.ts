@@ -17,7 +17,10 @@ export class HeaderIntercepterService implements HttpInterceptor {
     
     const jwt=localStorage.getItem('eshopZoneToken');
     const Authorization = "Bearer "+jwt;
-    console.log(jwt);
+    
+    console.log(" hello signin ");
+    console.log(Authorization);
+    console.log("");
     return next.handle(httpRequest.clone({ setHeaders: { Authorization } }));
   }
 }

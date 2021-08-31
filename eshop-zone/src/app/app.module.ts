@@ -23,7 +23,6 @@ import { HeaderIntercepterService } from './services/header-intercepter.service'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
@@ -32,7 +31,8 @@ import { HeaderIntercepterService } from './services/header-intercepter.service'
     MerchantModule,
     HttpClientModule,
     AuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeaderIntercepterService, multi: true }],
   bootstrap: [AppComponent]

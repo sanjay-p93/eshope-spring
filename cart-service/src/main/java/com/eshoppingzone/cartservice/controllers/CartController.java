@@ -35,30 +35,23 @@ public class CartController {
 		return cartService.findByUserId(userId);
 	}
 
-	@PostMapping("/add")
-	@ApiOperation(value = "Add cart for a user", notes = "Provide a cart model")
-	public void addnew(@RequestBody Cart cart, BindingResult result) {
-		cartService.add(cart);
-	}
-
 	@PostMapping("/addNewitem")
-	@ApiOperation(value = "Add new item to a cart", notes = "Provide a user id and cart item to add item to specific user cart")
-	public void addNewItem(@RequestBody WrapperNewCartItem wrapper, BindingResult result) {
-		System.out.println(result);
-		cartService.addNewItem(wrapper);
+	@ApiOperation(value = "Add new item to a cart Creat if not already exist", notes = "Provide a user id and cart item to add item to specific user cart")
+	public Cart addNewItem(@RequestBody WrapperNewCartItem wrapper, BindingResult result) {
+		return cartService.addNewItem(wrapper);
 	}
 
 	@PostMapping("/updateitemquantity")
 	@ApiOperation(value = "Update item quantity in a cart", notes = "Provide a user id, item id and new qantity to update quantity of the cart item")
-	public void updateItemQuantity(@RequestBody WrapperItemCount wrapper, BindingResult result) {
-		cartService.updateItemQuantity(wrapper);
+	public Cart updateItemQuantity(@RequestBody WrapperItemCount wrapper, BindingResult result) throws Exception {
+		return cartService.updateItemQuantity(wrapper);
 	}
 
 	@PostMapping("/deleteItem")
 	@ApiOperation(value = "Delete item in a cart", notes = "Provide a user id and item id to delete cart item")
-	public void deleteItem(@RequestBody WrapperUserIdItemId wrapper, BindingResult result) {
+	public Cart deleteItem(@RequestBody WrapperUserIdItemId wrapper, BindingResult result) throws Exception {
 		System.out.println(result);
-		cartService.deleteItem(wrapper);
+		return cartService.deleteItem(wrapper);
 	}
 
 	@PostMapping("/checkout")

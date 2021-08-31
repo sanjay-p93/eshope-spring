@@ -12,6 +12,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 const material =
@@ -27,7 +29,10 @@ const material =
     MatRadioModule,
     MatExpansionModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatChipsModule
+    
     
   ];
 

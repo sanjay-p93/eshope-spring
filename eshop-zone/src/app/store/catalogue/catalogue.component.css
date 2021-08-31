@@ -1,7 +1,7 @@
 .card {
   max-width: 275px;
   max-height: 390px;
-  margin: 10px auto;
+  margin: 10px 3px;
   display: inline-block;
 }
 img {
@@ -9,20 +9,11 @@ img {
   max-width: 275px;
   max-height: 200px;
 }
-/* .list {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-.list::after {
-  content: "";
-  flex: auto;
-} */
 .action{
     vertical-align: middle;
     padding-left: 10px;
     justify-content: space-between;
+    height: 46px !important;
 }
 mat-card-content{
   margin-bottom: 0px;
@@ -30,4 +21,16 @@ mat-card-content{
 }
 button{
   float:right;
+}
+.price{
+  vertical-align: -webkit-baseline-middle;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+@media screen and (max-width: 580px) {
+  .card {
+    margin: 1rem 4rem;
+  }
 }
