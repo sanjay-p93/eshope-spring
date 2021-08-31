@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { User } from 'src/app/models/user';
 import { CatalogueService } from 'src/app/services/catalogue.service';
 
 @Component({
@@ -23,6 +24,12 @@ export class CatalogueComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var retrievedObject = localStorage.getItem('loggedUser');
+    if(retrievedObject){
+     let user:User = JSON.parse(retrievedObject);
+     console.log(user);
+      
+    }
     this.getProducts("products");
   }
 

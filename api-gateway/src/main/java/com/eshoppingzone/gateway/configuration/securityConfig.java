@@ -41,9 +41,13 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests().antMatchers("/gateway/authenticate").permitAll()
-				.antMatchers("/catalogue/**").permitAll().anyRequest().authenticated().and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		http.csrf().disable().authorizeRequests().antMatchers("/gateway/authenticate").permitAll().antMatchers("/users/save_user").permitAll()
+//				.antMatchers("/catalogue/**").permitAll().anyRequest().authenticated().and().sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		http.addFilterBefore(JWTFilter, UsernamePasswordAuthenticationFilter.class);
+
+		http.csrf().disable().authorizeRequests().antMatchers("/**").permitAll()
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(JWTFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}

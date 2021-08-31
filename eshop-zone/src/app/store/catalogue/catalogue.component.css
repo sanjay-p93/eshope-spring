@@ -9,12 +9,16 @@ img {
   max-width: 275px;
   max-height: 200px;
 }
-.list{
-    display: flex;
-    flex-wrap: wrap ;
-    align-content: flex-start;
-    justify-items: left;
+/* .list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
+
+.list::after {
+  content: "";
+  flex: auto;
+} */
 .action{
     vertical-align: middle;
     padding-left: 10px;

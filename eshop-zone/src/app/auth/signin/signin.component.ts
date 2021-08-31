@@ -5,6 +5,7 @@ import { retry } from 'rxjs/operators';
 import { JWTRequest } from 'src/app/models/JWTRequest';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +18,8 @@ export class SigninComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private navBarService:NavBarService,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private userService:UserService
 
     ) { }
 
@@ -25,13 +27,14 @@ export class SigninComponent implements OnInit {
 
   setUserDetails(){
     this.signinForm = this.formBuilder.group({
-      email:             ["",Validators.required],
-      password :        ["",Validators.required],
+      email:             ["john@123",Validators.required],
+      password :        ["123456asd",Validators.required],
     });
 
   }
-  signIn(){
 
+
+  signIn(){
     if(!this.signinForm.valid) {
       this.signinForm.markAllAsTouched();
       return;
@@ -39,13 +42,27 @@ export class SigninComponent implements OnInit {
     const formValue = this.signinForm.value;
     const jwtReq : JWTRequest ={username:formValue["email"],password:formValue["password"]};
     this.authService.signIn(jwtReq).subscribe(result=>{
-       if(result.jwtToken!==""){
-        localStorage.setItem('eshopZoneToken', result.jwtToken);
-        this.router.navigate(['home']);
-        
-       }
+        if(result.jwtToken!==""){
+          localStorage.setItem('eshopZoneToken', result.jwtToken);
+          console.log(result.jwtToken);
+          this.getUser(jwtReq.username);
+        }
     });
   }
+
+  getUser(email : string){
+    this.userService.getUserDetails(email).subscribe(user=>{
+      if(!user){
+        localStorage.clear();
+        return;
+      }
+      localStorage.setItem('loggedUser', JSON.stringify(user));
+      localStorage.setItem('userRole', user.role);
+      this.navBarService.displayNav();
+      this.router.navigate(['home']);
+    });
+  }
+
 
 
   ngOnInit(): void {
