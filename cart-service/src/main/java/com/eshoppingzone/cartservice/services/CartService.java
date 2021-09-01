@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -129,7 +128,7 @@ public class CartService {
 
 
 	// Checkout cart items
-	public ResponseEntity<String> checkout(CheckoutDetails checkoutDetails) throws WalletException {
+	public ResponseEntity<Order> checkout(CheckoutDetails checkoutDetails) throws Exception {
 
 		Optional<Cart> CART = this.findByUserId(checkoutDetails.getUserId());
 		
@@ -140,11 +139,11 @@ public class CartService {
 				String txnId = this.initateWalletTransaction(order.getUserId(), order.getTotalPrice());
 				order.setTransactionId(txnId);
 			}
-			orderService.add(order);
+			order = orderService.add(order);
 			cartRepository.deleteById(cart.getId());
-			return ResponseEntity.ok().body("Order placed successfully.");
+			return ResponseEntity.ok().body(order);
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cart not found.");
+			throw new Exception("Cart not found.");
 		}
 
 	}
@@ -167,7 +166,8 @@ public class CartService {
 			throw new WalletException(httpClientOrServerExc.getResponseBodyAsString());
 
 		} catch (Exception e) {
-			throw new WalletException("Wallet service is unavailable at the moment.");
+			throw new WalletException(
+					"Wallet service is unavailable at the moment. Please try another payment option or try again later.");
 		}
 	}
 	

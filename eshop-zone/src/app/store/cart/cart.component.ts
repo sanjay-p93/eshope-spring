@@ -12,10 +12,11 @@ import { NavBarService } from 'src/app/services/nav-bar.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(private cartService:CartService,
+  constructor(
+    private cartService:CartService,
     private navBarService:NavBarService,
     private _snackBar: MatSnackBar
-    ) { }
+  ) { }
   cart!:Cart;
   isDisabled:boolean=false;
 

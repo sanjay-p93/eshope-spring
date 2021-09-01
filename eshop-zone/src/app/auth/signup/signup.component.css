@@ -37,3 +37,10 @@
     margin-left: 24px;
     margin-top: 2em;
 }
+p{
+    margin-bottom: 1px !important;
+}
+
+.title-auth{
+    margin-left: 36px !important;
+}

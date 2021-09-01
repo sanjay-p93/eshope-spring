@@ -43,9 +43,9 @@ public class OrderService {
 	}
 
 	// Add order
-	public void add(Order order) {
+	public Order add(Order order) {
 		order.setOrderStatus("PENDING");
-		orderRepository.save(order);
+		return orderRepository.save(order);
 	}
 
 

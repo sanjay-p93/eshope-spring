@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eshoppingzone.cartservice.exceptions.WalletException;
 import com.eshoppingzone.cartservice.models.Cart;
 import com.eshoppingzone.cartservice.models.CheckoutDetails;
+import com.eshoppingzone.cartservice.models.Order;
 import com.eshoppingzone.cartservice.models.WrapperItemCount;
 import com.eshoppingzone.cartservice.models.WrapperNewCartItem;
 import com.eshoppingzone.cartservice.models.WrapperUserIdItemId;
@@ -56,8 +57,8 @@ public class CartController {
 
 	@PostMapping("/checkout")
 	@ApiOperation(value = "Checkout a cart user cart and place order", notes = "Provide a user id, payment type and delivery address to place an order", response = String.class)
-	public ResponseEntity<String> checkout(@RequestBody CheckoutDetails checkoutDetails, BindingResult result)
-			throws WalletException {
+	public ResponseEntity<Order> checkout(@RequestBody CheckoutDetails checkoutDetails, BindingResult result)
+			throws WalletException, Exception {
 		return cartService.checkout(checkoutDetails);
 	}
 }

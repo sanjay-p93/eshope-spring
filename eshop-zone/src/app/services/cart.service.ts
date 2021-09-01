@@ -4,9 +4,11 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Cart } from '../models/cart';
 import { CartItem } from '../models/cartItem';
+import { CheckoutDetails } from '../models/checkoutDetails';
 import { DeleteItemWrapper } from '../models/deleteItemWrapper';
 import { ItemQuantityWrapper } from '../models/itemQuantityWrapper';
 import { NewCartItemWrapper } from '../models/newCartItemWrapper';
+import { Order } from '../models/order';
 import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
@@ -63,6 +65,13 @@ export class CartService {
       );
   }
 
+  checkOut(checkoutDetails:CheckoutDetails):Observable<Order>{
+    const checkOutUrl: string =this.cartUrl+"checkout";
+    return this.http.post<Order>(checkOutUrl,checkoutDetails,this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Order>('Removal ',undefined))
+      );
+  }
 
 
 

@@ -22,14 +22,14 @@
         </mat-expansion-panel-header>
         <div class="row">
 
-            <div class="order-details col-md-6">
+            <div class="order-details col-md-7">
                 <h3>ITEMS</h3>
                 <p *ngFor="let item of order.items; let j=index">
                    <span><b>{{j+1}}</b>:&nbsp;{{item.name}}&nbsp;&nbsp;<b>X&nbsp;{{item.quantity}}</b></span> 
                 </p>
             </div>
 
-            <div class="address  col-md-6">
+            <div class="address  col-md-5">
                 <h3>Delivery Adderss</h3>
                 <p class="text-dark" >{{order.address.building}}</p>
                 <p class="text-dark" >{{order.address.street}}</p>

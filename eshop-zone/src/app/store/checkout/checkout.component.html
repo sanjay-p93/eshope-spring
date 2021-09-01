@@ -5,31 +5,36 @@
 
               <div class="form-group col-md-6">
                   <label class="control-label text-secondary">Building</label>
-                  <input  formControlName="building" class="form-control" >
-                  <span class="text-danger"></span>
+                  <input  [class.is-invalid]="addressForm.get('building')?.invalid && addressForm.get('building')?.touched "
+                    formControlName="building" class="form-control" >
+                  <small *ngIf="addressForm.get('building')?.invalid && addressForm.get('building')?.touched"  class="text-danger">This field is required</small>
               </div>
               <div class="form-group col-md-6">
                   <label  class="control-label text-secondary">Landmark</label>
-                  <input  formControlName="landmark" class="form-control" >
-                  <span class="text-danger"></span>
+                  <input  [class.is-invalid]="addressForm.get('landmark')?.invalid && addressForm.get('landmark')?.touched "
+                    formControlName="landmark" class="form-control" >
+                  <small *ngIf="addressForm.get('landmark')?.invalid && addressForm.get('landmark')?.touched"  class="text-danger">This field is required</small>
               </div>
               <div class="form-group col-md-6">
                   <label class="control-label text-secondary">Street</label>
-                  <input formControlName="street" class="form-control" >
-                  <span class="text-danger"></span>
+                  <input [class.is-invalid]="addressForm.get('street')?.invalid && addressForm.get('street')?.touched "
+                    formControlName="street" class="form-control" >
+                  <small *ngIf="addressForm.get('street')?.invalid && addressForm.get('street')?.touched"  class="text-danger">This field is required</small>
               </div>
               <div class="form-group col-md-6">
                   <label  class="control-label text-secondary">City</label>
-                  <input  formControlName="city" class="form-control" >
-                  <span class="text-danger"></span>
+                  <input  [class.is-invalid]="addressForm.get('city')?.invalid && addressForm.get('city')?.touched "
+                    formControlName="city" class="form-control" >
+                  <small *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched"  class="text-danger">This field is required</small>
               </div>
               <div class="form-group col-md-3">
-                  <label  class="control-label text-secondary">Zip</label>
-                  <input  formControlName="zip" class="form-control" >
-                  <span class="text-danger"></span>
+                  <label  class="control-label text-secondary">Zip Code</label>
+                  <input  [class.is-invalid]="addressForm.get('zip')?.invalid && addressForm.get('zip')?.touched "
+                    formControlName="zip" class="form-control" >
+                  <small *ngIf="addressForm.get('zip')?.invalid && addressForm.get('zip')?.touched"  class="text-danger">Please enter a valid zip code</small>
               </div>
       <div class="col-6">
-        <button class="btn btn-dark"  matStepperNext>Next</button>
+        <button class="btn btn-dark" (click)="checkAddressForm()" matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
@@ -37,30 +42,31 @@
     <form [formGroup]="paymentForm">
 
       <mat-radio-group aria-label="Select an option" formControlName="paymentType">
+      
         <div class="row radio-m">
             <div class="form-group col-md-3">
               <mat-radio-button value="COD" >COD</mat-radio-button>
-          </div>
-          <div class="form-group col-md-3">
-              <mat-radio-button value="WALLET">WALLET</mat-radio-button>
-          </div>
+            </div>
+            <div class="form-group col-md-3">
+                <mat-radio-button value="WALLET">WALLET</mat-radio-button>
+            </div>
 
         </div>
 
       </mat-radio-group>
    
       <div>
-        <button class="btn btn-dark"  matStepperPrevious>Back</button>
+        <button class="btn btn-light"  matStepperPrevious>Back</button>
          <button class="btn btn-dark"  matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
+    <p class="text-muted">Please click checkout to Place the order</p>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="save()">Reset</button>
+      <button class="btn btn-light"  matStepperPrevious>Back</button>
+      <button class="btn btn-dark"  (click)="checkout()">Checkout</button>
     </div>
   </mat-step>
 </mat-stepper>

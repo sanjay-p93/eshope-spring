@@ -67,10 +67,12 @@ public class WalletService {
 				return ResponseEntity.ok().body(txnId);
 
 			} else {
-				return ResponseEntity.badRequest().body("Wallet balance insufficient.");
+				return ResponseEntity.badRequest()
+						.body("Wallet balance insufficient. Please top up your wallet or try another payment methord.");
 			}
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wallet not found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Wallet not found. Add wallet to your account avail this service");
 		}
 	}
 
