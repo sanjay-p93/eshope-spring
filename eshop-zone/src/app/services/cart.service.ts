@@ -29,10 +29,9 @@ export class CartService {
 
   getCart(): Observable<Cart> {
     let getUrl: string= this.cartUrl+"get/"+this.localstorageService.getUserId();
-    console.log(getUrl);
     return this.http.get<Cart>(getUrl)
       .pipe(
-        catchError(this.handleError<Cart>('Catalouge retrival', undefined))
+        catchError(this.handleError<Cart>('Cart retrival', undefined))
       );
   }
 
@@ -51,7 +50,7 @@ export class CartService {
     const wrapper: ItemQuantityWrapper = {userId:this.localstorageService.getUserId(),itemId: cartItem.id,quantity: cartItem.quantity}
     return this.http.post<Cart>(updateQtyUrl,wrapper,this.httpOptions)
       .pipe(
-        catchError(this.handleError<Cart>('Adding new item',undefined))
+        catchError(this.handleError<Cart>('Adding item',undefined))
       );
   }
 
@@ -60,7 +59,7 @@ export class CartService {
     const wrapper: DeleteItemWrapper = {userId:this.localstorageService.getUserId(),itemId: cartItem.id}
     return this.http.post<Cart>(deletionUrl,wrapper,this.httpOptions)
       .pipe(
-        catchError(this.handleError<Cart>('Adding new item',undefined))
+        catchError(this.handleError<Cart>('Removal ',undefined))
       );
   }
 
@@ -70,15 +69,17 @@ export class CartService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+
       if(error.status==403){
-        alert("You are not authorized for this action.",);
+        alert("You are not authorized to do this action");
       }
       else if(typeof(error.error)=="string"){
         alert(error.error);
       }
       else{
-        alert("Oops something went wrong. Try again after sometime.");
+        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
       }
+
       console.error(error.error); 
       console.log(`${operation} failed : ${error.message}`);
 

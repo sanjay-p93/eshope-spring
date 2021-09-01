@@ -3,7 +3,14 @@
   <div  routerLink="/home" class="app-name">Eshop-Zone</div>
   <div>
       <span routerLink="/orders" class="nav-option">Orders</span>
-      <span><mat-icon  routerLink="/profile" class="nav-icon">account_circle</mat-icon></span>
+      <span> <mat-icon [matMenuTriggerFor]="beforeMenu" class="nav-icon">account_circle</mat-icon>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <span routerLink="/profile" mat-menu-item>My Profile</span>
+          <span (click)="logOut()" mat-menu-item>Log out</span>
+          <span routerLink="/signin" mat-menu-item>Log in</span>
+        </mat-menu>
+        
+       </span>
       <span><mat-icon  routerLink="/cart" class="nav-icon" [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount==0" >shopping_cart</mat-icon></span>
   </div>
   

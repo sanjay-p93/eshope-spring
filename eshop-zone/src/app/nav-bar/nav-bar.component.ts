@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavBarService } from '../services/nav-bar.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +9,10 @@ import { NavBarService } from '../services/nav-bar.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private navBarService:NavBarService) { }
+  constructor(
+    private navBarService:NavBarService,
+    private userService:UserService
+  ) { }
   isActive:boolean=true;
   cartItemCount:number=0;
 
@@ -23,6 +27,11 @@ export class NavBarComponent implements OnInit {
     this.navBarService.cartItemCount$.subscribe(
       cartItemCount=>this.cartItemCount=cartItemCount
     );
+  }
+
+
+  logOut(){
+   // this.userService.logOut();
   }
 
   ngOnInit(): void {

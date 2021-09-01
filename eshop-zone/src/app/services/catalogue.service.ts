@@ -31,6 +31,17 @@ export class CatalogueService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+
+      if(error.status==403){
+        alert("You are not authorized to do this action");
+      }
+      else if(typeof(error.error)=="string"){
+        alert(error.error);
+      }
+      else{
+        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
+      }
+
       console.error(error); 
       console.log(`${operation} failed : ${error.message}`);
 

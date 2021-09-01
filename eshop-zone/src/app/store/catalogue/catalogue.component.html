@@ -21,7 +21,7 @@
             <p>{{product.description}}</p>
         </mat-card-content>
         <mat-card-actions class="action">
-            <span class="price inline-block"  (click)="onClickLog()">₹&nbsp;{{product.price}}</span>
+            <span class="price inline-block">₹&nbsp;{{product.price}}</span>
             <span *ngIf="!itemQtyMap.has(product.id)">
                 <button class="btn btn-success btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
             </span>

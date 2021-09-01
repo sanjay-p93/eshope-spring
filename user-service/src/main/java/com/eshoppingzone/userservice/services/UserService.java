@@ -19,13 +19,30 @@ public class UserService {
 		return userRepository.findOneByEmail(email);
 	}
 
-	public User save(User user) throws Exception {
+	// add new user if not already exist
+	public User addnew(User user) throws Exception {
 		Optional<User> existingUser = this.getUserByEmail(user.getEmail());
 		if (existingUser.isEmpty()) {
 			user.setRole("CUSTOMER");
 			return userRepository.save(user);
 		} else {
 			throw new Exception("User with email " + user.getEmail() + " already exist.");
+
+		}
+	}
+
+	// save updated user
+	public User save(User user) throws Exception {
+		Optional<User> USER = this.getUserByEmail(user.getEmail());
+		System.out.println("------------- \n\n");
+		System.out.println(user);
+		if (USER.isPresent()) {
+			User existingUser = USER.get();
+			user.setRole(existingUser.getRole());
+			user.setId(existingUser.getId());
+			return userRepository.save(user);
+		} else {
+			throw new Exception("Couldnt find valid user by the name email " + user.getEmail());
 
 		}
 	}

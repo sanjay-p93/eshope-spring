@@ -2,14 +2,20 @@
     
     <div class="col-md-12">
         <div class="row">
-            <div class="form-group col-md-12 "><h2>Profile</h2></div>
+            <div class="form-group col-md-9 "><h2>Profile</h2></div>
+
+            <div class="form-group col-md-3">
+                <button (click)="save()" *ngIf="isEdit" type="submit" class="btn btn-dark btn-sm mr-2">Save</button>
+                <button (click)="edit()" *ngIf="!isEdit" type="submit" class="btn btn-dark btn-sm ">Edit</button>
+                <button (click)="cancel()" *ngIf="isEdit" type="submit" class="btn btn-light btn-sm ">Cancel</button>
+            </div>
         </div>
         <form [formGroup]="userForm" >
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label text-secondary">Name</label>
                     <input [class.is-invalid]="userForm.get('name')?.invalid && userForm.get('name')?.touched " 
-                        formControlName="name" type="text" class="form-control" >
+                    formControlName="name" type="text" class="form-control" >
                     <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
                         <small *ngIf="userForm.get('name')?.errors?.required" class="text-danger">Name is required</small>
                         <small *ngIf="userForm.get('name')?.errors?.maxlength" class="text-danger">Max 25 characters allowed</small>
@@ -17,7 +23,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label text-secondary">Email</label>
-                    <input formControlName="email" type="text" class="form-control">
+                    <input [attr.readonly]="true"  formControlName="email" type="text" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -79,12 +85,6 @@
 
             </div>
      
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <button (click)="save()"type="submit" class="btn btn-dark">Save</button>
-                </div>
-
-            </div>
         </form>
     </div>
 </div>

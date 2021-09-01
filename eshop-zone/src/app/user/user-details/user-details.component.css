@@ -4,3 +4,6 @@ h3{
 .form-control.is-invalid{
     background-image: none;
 }
+button{
+    width: 61px;
+}

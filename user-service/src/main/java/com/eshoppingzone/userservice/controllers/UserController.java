@@ -29,10 +29,15 @@ public class UserController {
 		return userService.getUserByEmail(email);
 	}
 
-	@PostMapping("/save_user")
+	@PostMapping("/signup")
 	@ApiOperation(value = "Add a new user", notes = "Provide userdetails to add a new user")
 	public User addnew(@RequestBody User user, BindingResult result) throws Exception {
-		return userService.save(user);
+		return userService.addnew(user);
 	}
 
+	@PostMapping("/save")
+	@ApiOperation(value = "Add a new user", notes = "Provide userdetails to add a new user")
+	public User save(@RequestBody User user, BindingResult result) throws Exception {
+		return userService.save(user);
+	}
 }

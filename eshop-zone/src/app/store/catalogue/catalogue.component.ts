@@ -24,7 +24,8 @@ export class CatalogueComponent implements OnInit {
     private cartService: CartService,
     private _snackBar: MatSnackBar,
     private test:LocalstorageService, 
-    private navBarService:NavBarService
+    private navBarService:NavBarService,
+    private localstorageService: LocalstorageService
     
   ) { }
   
@@ -39,16 +40,19 @@ export class CatalogueComponent implements OnInit {
   getAllProducts(): void {
     this.catalogueService.getAllProducts()
       .subscribe(data => this.products = data);
-    this.getCart();
+      this.getCart();
   }
 
   getByCategory(category: string): void {
     this.catalogueService.getByCategory(category)
       .subscribe(data => this.products = data);
-    this.getCart();
+      this.getCart();
   }
 
   getCart(): void {
+    if(!this.localstorageService.getUser){
+      return;
+    }
     this.cartService.getCart()
       .subscribe(data => {
         this.cart = data;
@@ -86,18 +90,6 @@ export class CatalogueComponent implements OnInit {
     })
   }
 
-
-  onClickLog(): void {
-    this.test.clear();
-    console.log("this.products");
-    console.log(this.products);
-    console.log("this.cart");
-    console.log(this.cart);
-    console.log("itemQtyMap");
-    console.log(this.itemQtyMap);
-
-    
-  }
 
   snackBar(mesage:string){
     this._snackBar.open(mesage, 'close', {

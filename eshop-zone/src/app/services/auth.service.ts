@@ -13,7 +13,7 @@ import { User } from '../models/user';
 export class AuthService {
 
   private signinUrl = 'http://localhost:8080/gateway/authenticate';
-  private signupUrl = 'http://localhost:8080/users/save_user'; 
+  private signupUrl = 'http://localhost:8080/users/signup'; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -39,13 +39,13 @@ export class AuthService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if(error.status==403){
-        alert("Invalid Cradentials",);
+        alert("You are not authorized to do this action");
       }
       else if(typeof(error.error)=="string"){
         alert(error.error);
       }
       else{
-        alert("Oops something went wrong. Try again after sometime.");
+        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
       }
       console.error(error.error); 
       console.log(`${operation} failed : ${error.message}`);
