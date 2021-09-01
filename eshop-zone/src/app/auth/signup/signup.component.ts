@@ -5,6 +5,7 @@ import { JWTRequest } from 'src/app/models/JWTRequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
+import { UserService } from 'src/app/services/user.service';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 
 @Component({
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private navBarService:NavBarService,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    private userService:UserService
     ) { }
 
   signupForm!: FormGroup;
@@ -45,6 +47,7 @@ export class SignupComponent implements OnInit {
         if(result){
           localStorage.setItem('eshopZoneUser', JSON.stringify(result));
           localStorage.setItem('eshopZoneRole', result.role);
+          this.userService.setAsLoggedIn();
           this.signIn(result);
         }
     });

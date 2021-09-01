@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { count } from 'rxjs/operators';
 import { NavBarService } from '../services/nav-bar.service';
 import { UserService } from '../services/user.service';
 
@@ -14,6 +15,7 @@ export class NavBarComponent implements OnInit {
     private userService:UserService
   ) { }
   isActive:boolean=true;
+  isLoggedIn:boolean=false;
   cartItemCount:number=0;
 
   setNavBar(){
@@ -30,13 +32,21 @@ export class NavBarComponent implements OnInit {
   }
 
 
+  setAsLoggedIn(){
+    this.userService.isLoggedIn$.subscribe(
+      isLoggedIn=>this.isLoggedIn=isLoggedIn
+    );
+  }
+
+
   logOut(){
-   // this.userService.logOut();
+    this.userService.logOut();
   }
 
   ngOnInit(): void {
     this.setNavBar();
-    this.setCartItemCount()
+    this.setCartItemCount();
+    this.setAsLoggedIn();
   }
 
 }

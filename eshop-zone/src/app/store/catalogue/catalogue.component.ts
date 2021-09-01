@@ -10,6 +10,7 @@ import { CatalogueService } from 'src/app/services/catalogue.service';import {
 } from '@angular/material/snack-bar';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -25,13 +26,15 @@ export class CatalogueComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private test:LocalstorageService, 
     private navBarService:NavBarService,
-    private localstorageService: LocalstorageService
+    private localstorageService: LocalstorageService,
+    private userService:UserService
     
   ) { }
   
   itemQtyMap= new Map();  
   products: Product[] = [];
   cart:Cart= <Cart>{};
+  isLoggedIn:boolean=false;
 
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -50,14 +53,25 @@ export class CatalogueComponent implements OnInit {
   }
 
   getCart(): void {
-    if(!this.localstorageService.getUser){
+    if(!this.localstorageService.getUser()){
       return;
     }
+    this.setAsLoggedIn();
+    this.userService.setAsLoggedIn();
     this.cartService.getCart()
       .subscribe(data => {
         this.cart = data;
         this.setQtyMap();
       });
+  }
+
+  setAsLoggedIn(){
+    console.log("ist eree");
+    this.userService.isLoggedIn$.subscribe(
+      isLoggedIn=>{this.isLoggedIn=isLoggedIn;
+        console.log("this works");
+      }
+    );
   }
 
   setQtyMap(){

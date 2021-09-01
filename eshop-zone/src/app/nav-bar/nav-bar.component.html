@@ -5,9 +5,9 @@
       <span routerLink="/orders" class="nav-option">Orders</span>
       <span> <mat-icon [matMenuTriggerFor]="beforeMenu" class="nav-icon">account_circle</mat-icon>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <span routerLink="/profile" mat-menu-item>My Profile</span>
-          <span (click)="logOut()" mat-menu-item>Log out</span>
-          <span routerLink="/signin" mat-menu-item>Log in</span>
+          <span *ngIf="isLoggedIn" routerLink="/profile" mat-menu-item>My Profile</span>
+          <span *ngIf="isLoggedIn" (click)="logOut()" mat-menu-item>Log out</span>
+          <span *ngIf="!isLoggedIn" routerLink="/signin" mat-menu-item>Log in</span>
         </mat-menu>
         
        </span>

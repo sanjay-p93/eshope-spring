@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
 
@@ -14,6 +14,9 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+
+  private isLoggedIn = new Subject<boolean>();
+  isLoggedIn$ =this.isLoggedIn.asObservable();
   
   constructor(private http: HttpClient,
     private router: Router
@@ -35,6 +38,14 @@ export class UserService {
       );
   }
 
+  logOut(){
+    localStorage.clear();
+    this.isLoggedIn.next(false);
+    this.router.navigate(['home']);
+  }
+  setAsLoggedIn(){
+    this.isLoggedIn.next(true);
+  }
 
 
   private handleError<T>(operation = 'operation', result?: T) {
