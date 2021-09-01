@@ -27,8 +27,8 @@ export class SigninComponent implements OnInit {
 
   setUserDetails(){
     this.signinForm = this.formBuilder.group({
-      email:             ["john@123",Validators.required],
-      password :        ["123456asd",Validators.required],
+      email:             ["rambo@123",Validators.required],
+      password :        ["1234asdf",Validators.required],
     });
 
   }

@@ -18,7 +18,7 @@ export class LocalstorageService {
       let user: User = JSON.parse(USER);
       return user;
     }
-    return null;
+    return undefined;
   }
 
   getUserId(){

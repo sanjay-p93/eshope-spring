@@ -8,6 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrderListComponent } from './order-list/order-list.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     OrderComponent,
     UserDetailsComponent,
-    UserWalletComponent
+    UserWalletComponent,
+    OrderListComponent
   ],
   imports: [
     CommonModule,

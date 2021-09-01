@@ -24,7 +24,6 @@ export class CatalogueComponent implements OnInit {
     private catalogueService: CatalogueService,
     private cartService: CartService,
     private _snackBar: MatSnackBar,
-    private test:LocalstorageService, 
     private navBarService:NavBarService,
     private localstorageService: LocalstorageService,
     private userService:UserService

@@ -51,15 +51,15 @@ public class OrderController {
 
 	@GetMapping("/complete/{id}")
 	@ApiOperation(value = "Complete an order by Id", notes = "Provide id to complete a specific order")
-	public void completed(@PathVariable String id) {
-		orderService.completeOrder(id);
+	public Order completed(@PathVariable String id) throws Exception {
+		return orderService.completeOrder(id);
 	}
 
 
 	@GetMapping("/cancel/{id}")
 	@ApiOperation(value = "Cancel an order by Id", notes = "Provide id to cancel a specific order")
-	public void cancel(@PathVariable String id) {
-		orderService.cancelOrder(id);
+	public Order cancel(@PathVariable String id) throws Exception {
+		return orderService.cancelOrder(id);
 	}
 
 }

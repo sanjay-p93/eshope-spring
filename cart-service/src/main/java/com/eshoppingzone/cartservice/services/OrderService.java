@@ -50,7 +50,7 @@ public class OrderService {
 
 
 	// complete order
-	public void completeOrder(String id) {
+	public Order completeOrder(String id) throws Exception {
 
 		Optional<Order> ORDER = this.findById(id);
 		if (ORDER.isPresent()) {
@@ -61,13 +61,15 @@ public class OrderService {
 				System.out.println(msg);
 			}
 			order.setOrderStatus("COMPLETED");
-			orderRepository.save(order);
+			return orderRepository.save(order);
+		} else {
+			throw new Exception("Could not find this order.");
 		}
 	}
 
 
 	// cancel order
-	public void cancelOrder(String id) {
+	public Order cancelOrder(String id) throws Exception {
 
 		Optional<Order> ORDER = this.findById(id);
 		if (ORDER.isPresent()) {
@@ -78,7 +80,9 @@ public class OrderService {
 				System.out.println(msg);
 			}
 			order.setOrderStatus("CANCELLED");
-			orderRepository.save(order);
+			return orderRepository.save(order);
+		} else {
+			throw new Exception("Could not find this order.");
 		}
 	}
 

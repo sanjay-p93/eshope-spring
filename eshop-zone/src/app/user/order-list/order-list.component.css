@@ -1,0 +1,19 @@
+.description {
+    justify-content: space-between;
+}
+.center-item{
+    margin: 0px auto;
+}
+p{
+    margin-bottom: 2px;
+}
+h3{
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.action{
+    height: 30px;
+}
+button{
+    width: 80px;
+}

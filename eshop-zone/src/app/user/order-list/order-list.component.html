@@ -1,0 +1,56 @@
+  
+
+<div class="col-lg-10 center-item">
+    <div class="col-md-12 mt-5">
+        <h1>Orders</h1>                   
+    </div>   
+
+    <div *ngIf="orders.length==0" class="alert alert-warning" role="alert">
+        Seems you have not placed any orders yet. <a routerLink="/home">Click here </a>to start shopping!
+    </div>
+
+    <mat-expansion-panel class="mt-1" *ngFor="let order of orders; let i=index">
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            <b>#{{order.id}}</b>
+        </mat-panel-title>
+        <mat-panel-description class="description">
+            <span>{{order.items.length}}&nbsp;Items</span>
+            <span [class]="getBadgeClass(order.orderStatus)">{{order.orderStatus}}</span>
+           <span>{{getDate(order.id)| date | titlecase }}</span>
+        </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+
+            <div class="order-details col-md-6">
+                <h3>ITEMS</h3>
+                <p *ngFor="let item of order.items; let j=index">
+                   <span><b>{{j+1}}</b>:&nbsp;{{item.name}}&nbsp;&nbsp;<b>X&nbsp;{{item.quantity}}</b></span> 
+                </p>
+            </div>
+
+            <div class="address  col-md-6">
+                <h3>Delivery Adderss</h3>
+                <p class="text-dark" >{{order.address.building}}</p>
+                <p class="text-dark" >{{order.address.street}}</p>
+                <p class="text-dark" >{{order.address.landmark}}</p>
+                <p class="text-dark" >{{order.address.city}}&nbsp;-&nbsp;{{order.address.zip}} </p>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="payment col-12 description">
+                <p class="text-muted">Payment Type&nbsp;{{order.paymentType}}</p>
+                <span *ngIf="order.transactionId" class="text-muted">transactionId:&nbsp;#{{order.transactionId}}</span>
+            </div>
+            <div class="total col-12 mt-3">
+                <h3>Total :&nbsp;&nbsp;₹ {{order.totalPrice}}</h3>
+            </div>
+        </div>
+        <div class="action">      
+            <button *ngIf="order.orderStatus=='PENDING'" (click)="complete(order)" type="button" class="btn btn-dark btn-sm mr-3">Complete</button>
+            <button *ngIf="order.orderStatus=='PENDING'" (click)="cancel(order)" type="button" class="btn btn-light btn-sm">Cancel</button>
+        </div>
+
+    </mat-expansion-panel>  
+        
+</div>
