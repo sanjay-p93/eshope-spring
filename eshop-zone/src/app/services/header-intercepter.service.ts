@@ -10,7 +10,7 @@ export class HeaderIntercepterService implements HttpInterceptor {
 
 
     if (httpRequest.url.includes("catalogue/")||httpRequest.url.includes("gateway/authenticate")
-          ||httpRequest.url.includes("users/save_user")) {
+          ||httpRequest.url.includes("users/signup")) {
       console.log("no porobs here "+httpRequest.url);      
       return next.handle(httpRequest);
     }

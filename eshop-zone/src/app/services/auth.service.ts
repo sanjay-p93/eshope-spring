@@ -39,7 +39,7 @@ export class AuthService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if(error.status==403){
-        alert("You are not authorized to do this action");
+        alert("Invalid credentials");
       }
       else if(typeof(error.error)=="string"){
         alert(error.error);

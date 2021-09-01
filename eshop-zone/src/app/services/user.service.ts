@@ -43,9 +43,6 @@ export class UserService {
     this.isLoggedIn.next(false);
     this.router.navigate(['home']);
   }
-  setAsLoggedIn(){
-    this.isLoggedIn.next(true);
-  }
 
 
   private handleError<T>(operation = 'operation', result?: T) {

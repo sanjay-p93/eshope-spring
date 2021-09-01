@@ -5,59 +5,82 @@
                 <div class="row heading-card">
                     <div class="form-group col-md-12 "><h2>My Cart</h2></div>
                 </div>
-                <div class="row item-card">
-                    <div class="col-3">
-                        <div class="image">
-                            <img mat-card-image src="" alt="Item image">
-                        </div>
-                        
-                    </div>
-                    <div class="col-7">
-                        <h2 class="item-name">hello</h2>
-                        <h4 class="item-category">hi</h4>
-                        <p class="tem-prize">223 x 3</p>
-                        <div class="row item-action">
-                            <div class="col-6">
-                                <div class="row p-0">
-                                    
-                                    <div class="col-1 p-0 icon minus">
-                                        <mat-icon [inline]="true">remove_circle</mat-icon>
-                                    </div>
-                                    <div class="col-4 p-0">
-                                        <input type="number" class="form-control">
-                                    </div>
 
-                                    <div class="col-1 p-0 icon">
-                                        <mat-icon [inline]="true">add_circle</mat-icon>
+                <div *ngIf="!cart" class="alert alert-warning mt-5" role="alert">
+                    Looks like your cart is empty. <a routerLink="/home">Click here </a>to start shopping!
+                </div>
+                <div *ngIf="cart">
+                    <div class="row item-card" *ngFor="let item of cart.items; let i=index">
+                            <div class="col-3">
+                                <div class="image">
+                                    <img  [src]="item.imageUrl" alt="Item image">
+                                </div>
+                                
+                            </div>
+                            <div class="col-7">
+                                <h2 class="item-name">{{item.name}} </h2>
+                                <h4 class="item-category">{{item.category}}</h4>
+                                <p class="item-price">₹&nbsp;{{item.price}}</p>
+                                <div class="row item-action">
+                                    <div class="counter">
+                                        <div class="row p-0">
+                                            
+                                            <div class="col-1 p-0 icon minus">
+                                                <mat-icon (click)="stepDown(i,item)" [inline]="true">remove_circle</mat-icon>
+                                            </div>
+                                            <div class="col-4 p-0">
+                                                <input type="number" [ngModel]="item.quantity" (ngModelChange)="quantityUpdate($event,i,item)" 
+                                                [ngModelOptions]="{ updateOn: 'blur' }"  min=0 step=1 class="form-control form-control-sm" type="number" class="form-control">
+                                            </div>
+        
+                                            <div class="col-1 p-0 icon"  >
+                                                <mat-icon (click)="stepUp(i,item)" [inline]="true">add_circle</mat-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <button (click)="removeFromCart(item)" class="btn btn-dark btn-sm">Remove</button>
                                     </div>
                                 </div>
+        
                             </div>
-                            <div class="col-4">
-                                <button class="btn btn-dark">Remove</button>
+                            <div class="col-2">
+                                <h2>Item total</h2>
+                                <h2>₹ &nbsp;{{item.price*item.quantity}} </h2>
+                                
                             </div>
+                            
                         </div>
 
-                    </div>
-                    <div class="col-2">
-                        <h2>Item total</h2>
-                        <h2>₹ &nbsp;223 </h2>
-                        
-                    </div>
-                    
                 </div>
                 
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div *ngIf="cart" class="col-lg-4">
         <div class=" shadow p-3 mb-5 bg-white rounded">
                 <div class="col-md-12">
                     <div class="row heading-card">
-                        <div class="form-group col-md-12 "><h2>PRICE DETAILS</h2></div>
+                        <div class="form-group col-md-12 "><h2>Checkout Details</h2></div>
                     </div>    
                 </div>    
                 <div class=" item-card">
-
+                    <div class="row">
+                        <div class="col-8">
+                            Total item count
+                        </div>
+                        <div class="col-4 font-weight-bold">
+                            :&nbsp;{{getTotalNumber()}}&nbsp;No.s
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            Total price
+                        </div>
+                        <div class="col-4 font-weight-bold">
+                            :&nbsp;₹&nbsp;{{cart.totalPrice}} 
+                        </div>
+                    </div>
                 </div>  
                 <div class="row text-center">
                     <span routerLink="/checkout" class="btn btn-lg btn-dark  center-item">Check Out</span>

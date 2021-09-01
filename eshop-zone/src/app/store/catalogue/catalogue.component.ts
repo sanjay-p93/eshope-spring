@@ -3,7 +3,8 @@ import { Cart } from 'src/app/models/cart';
 import { CartItem } from 'src/app/models/cartItem';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
-import { CatalogueService } from 'src/app/services/catalogue.service';import {
+import { CatalogueService } from 'src/app/services/catalogue.service';
+import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
@@ -34,44 +35,43 @@ export class CatalogueComponent implements OnInit {
   products: Product[] = [];
   cart:Cart= <Cart>{};
   isLoggedIn:boolean=false;
+  isRequest:boolean=false;
 
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   getAllProducts(): void {
+    this.isRequest=true;
     this.catalogueService.getAllProducts()
       .subscribe(data => this.products = data);
+      this.isRequest=false;
       this.getCart();
   }
 
   getByCategory(category: string): void {
+    this.isRequest=true;
     this.catalogueService.getByCategory(category)
       .subscribe(data => this.products = data);
       this.getCart();
+      this.isRequest=false;
   }
 
   getCart(): void {
+    this.isLoggedIn=false;
     if(!this.localstorageService.getUser()){
       return;
     }
-    this.setAsLoggedIn();
-    this.userService.setAsLoggedIn();
+    this.isLoggedIn=true;
+    this.isRequest=true;
     this.cartService.getCart()
       .subscribe(data => {
         this.cart = data;
         this.setQtyMap();
+        this.isRequest=false;
       });
   }
 
-  setAsLoggedIn(){
-    console.log("ist eree");
-    this.userService.isLoggedIn$.subscribe(
-      isLoggedIn=>{this.isLoggedIn=isLoggedIn;
-        console.log("this works");
-      }
-    );
-  }
 
   setQtyMap(){
     this.itemQtyMap= new Map(); 
@@ -84,10 +84,12 @@ export class CatalogueComponent implements OnInit {
   }
 
   addToCart(item: Product):void{
+    this.isRequest=true;
     let newCartItem:CartItem=Object.assign({quantity: 1}, item);
     this.cartService.addItem(newCartItem).subscribe(result=>{
       this.cart=result;
       this.setQtyMap();
+      this.isRequest=false;
       if(this.cart){
         this.snackBar(item.name+" is added to cart");
       }
@@ -95,10 +97,12 @@ export class CatalogueComponent implements OnInit {
   }
 
   removeFromCart(item: Product):void{
+    this.isRequest=true;
     let thisCartItem:CartItem=Object.assign({quantity: 0}, item);
     this.cartService.deleteItem(thisCartItem).subscribe(result=>{
       this.cart=result;
       this.setQtyMap();
+      this.isRequest=false;
       this.snackBar(item.name+" is removed from cart");
     })
   }
@@ -111,8 +115,17 @@ export class CatalogueComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
   }
+  setAsLoggedIn(){
+    this.userService.isLoggedIn$.subscribe(
+      isLoggedIn=>{this.isLoggedIn=isLoggedIn;
+        console.log("this works");
+      }
+    );
+  }
 
   ngOnInit(): void {
+    this.navBarService.displayNav();
+    this.setAsLoggedIn();
     this.getAllProducts();
   }
 

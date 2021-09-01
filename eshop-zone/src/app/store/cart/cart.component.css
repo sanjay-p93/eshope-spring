@@ -12,14 +12,14 @@
 .item-card{
     color: rgb(66, 65, 65);
     border-bottom: 1px solid rgb(201, 201, 201);
-    margin-top: 10px;
-    height: 175px;
+    height: 174px;
+    padding-top: 9px;
 
 }
 mat-card-subtitle{
     color: grey;
 }
-.image{
+img{
     width: 150px;
     height: 150px;
 }
@@ -33,10 +33,11 @@ mat-card-subtitle{
     margin-bottom: 3px;
 }
 .item-action{
-    padding: 0px;
+    padding: 0px;    
+    margin-top: 39px;
 }
 .icon {
-    font-size: 36px;
+    font-size: 31px;
     line-height: 1;
     min-width: 36px;
 }
@@ -56,4 +57,12 @@ input[type=number] {
 
 .center-item{
     margin: 0px auto;
+}
+
+input{
+    height: 31px;
+}
+.counter{
+    width: 154px !important;
+    margin-left: 27px;
 }

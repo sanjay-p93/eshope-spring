@@ -23,10 +23,10 @@
         <mat-card-actions class="action">
             <span class="price inline-block">₹&nbsp;{{product.price}}</span>
             <span *ngIf="!itemQtyMap.has(product.id) && isLoggedIn">
-                <button class="btn btn-success btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
+                <button [disabled]="isRequest" class="btn btn-light btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
             </span>
             <span *ngIf="itemQtyMap.has(product.id) && isLoggedIn">
-                <button (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
+                <button [disabled]="isRequest" (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
             </span>
         </mat-card-actions>
     </mat-card>

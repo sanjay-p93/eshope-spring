@@ -47,7 +47,6 @@ export class SignupComponent implements OnInit {
         if(result){
           localStorage.setItem('eshopZoneUser', JSON.stringify(result));
           localStorage.setItem('eshopZoneRole', result.role);
-          this.userService.setAsLoggedIn();
           this.signIn(result);
         }
     });
@@ -58,7 +57,6 @@ export class SignupComponent implements OnInit {
     this.authService.signIn(jwtReq).subscribe(result=>{
         if(result.jwtToken!==""){
           localStorage.setItem('eshopZoneToken', result.jwtToken);
-          this.navBarService.displayNav();
           this.router.navigate(['home']);
         }
         else{

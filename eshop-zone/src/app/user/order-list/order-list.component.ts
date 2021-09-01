@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
 import { User } from 'src/app/models/user';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,6 +19,7 @@ export class OrderListComponent implements OnInit {
     private orderService:OrderService,
     private localstorageService: LocalstorageService,
     private userService:UserService,
+    private navBarService:NavBarService
   ) { }
 
   user?:User;
@@ -67,11 +69,11 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.navBarService.displayNav();
     this.user=this.localstorageService.getUser();
     if(!this.user){
       this.userService.logOut();
     }
-    this.userService.setAsLoggedIn();
     this.getOrders();
   }
 

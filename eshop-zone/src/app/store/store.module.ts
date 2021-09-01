@@ -6,7 +6,7 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
 import { MaterialModule } from '../material/material.module';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     StoreRoutingModule,
     MaterialModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class StoreModule { }
