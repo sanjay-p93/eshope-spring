@@ -29,11 +29,13 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  delete(id:string,index:number){
-    this.productService.deleteProduct(id).subscribe(result=> {
-      console.log(result);
-      this.getAllProducts();
-    });
+  delete(id:string,index:number,name:string){
+    if(confirm("Are you sure to delete "+name)) {
+      this.productService.deleteProduct(id).subscribe(result=> {
+        console.log(result);
+        this.getAllProducts();
+      });
+    }
 
   }
 

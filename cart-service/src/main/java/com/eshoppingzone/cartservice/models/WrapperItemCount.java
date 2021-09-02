@@ -5,6 +5,17 @@ public class WrapperItemCount {
 	private String itemId;
 	private int quantity;
 
+	public WrapperItemCount() {
+		super();
+	}
+
+	public WrapperItemCount(String userId, String itemId, int quantity) {
+		super();
+		this.userId = userId;
+		this.itemId = itemId;
+		this.quantity = quantity;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
@@ -20,6 +31,7 @@ public class WrapperItemCount {
 	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
+
 
 	public int getQuantity() {
 		return quantity;

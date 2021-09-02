@@ -29,4 +29,15 @@ public class CheckoutDetails {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+	public CheckoutDetails() {
+		super();
+	}
+
+	public CheckoutDetails(String userId, String paymentType, Address address) {
+		super();
+		this.userId = userId;
+		this.paymentType = paymentType;
+		this.address = address;
+	}
 }

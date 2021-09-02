@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.eshoppingzone.catalogueservice.dao.ProductRepository;
 import com.eshoppingzone.catalogueservice.models.Product;
+import com.eshoppingzone.catalogueservice.repositories.ProductRepository;
 import com.eshoppingzone.catalogueservice.services.CatalogueService;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +41,7 @@ class CatalogueServiceApplicationTests {
 	}
 
 	@Test
-	public void getProductById() {
+	public void getProductByIdTest() {
 		String id = "id1";
 		Product product = new Product("id1", "TestProduct1", "Test descriptionq", BigDecimal.valueOf(23), "BOOKS",
 				"https://m.media-amazon.com/images/I/71Jmd1zPfRL._SY879_.jpg");
@@ -50,7 +50,7 @@ class CatalogueServiceApplicationTests {
 	}
 
 	@Test
-	public void getProductByCategory() {
+	public void getProductByCategoryTest() {
 		String category = "BOOK1S";
 		when(repository.findByCategory(category))
 				.thenReturn(Stream
@@ -62,7 +62,7 @@ class CatalogueServiceApplicationTests {
 	}
 
 	@Test
-	public void getProductByName() {
+	public void getProductByNameTest() {
 		String name = "TestProduct1";
 		when(repository.findByNameRegex("\\b" + name + ".*\\b"))
 				.thenReturn(Stream

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eshoppingzone.catalogueservice.dao.ProductRepository;
 import com.eshoppingzone.catalogueservice.models.Product;
+import com.eshoppingzone.catalogueservice.repositories.ProductRepository;
 
 @Service
 public class CatalogueService {

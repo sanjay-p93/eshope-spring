@@ -52,6 +52,7 @@ public class TransactionService {
 				transactionRepository.save(transaction);
 			}
 		} else {
+			new Exception("Invalid transaction Id");
 			// Transaction Id not valid.
 		}
 	}
@@ -69,6 +70,7 @@ public class TransactionService {
 				transactionRepository.save(transaction);
 			}
 		} else {
+			new Exception("Invalid transaction Id");
 			// Transaction Id not valid.
 		}
 	}

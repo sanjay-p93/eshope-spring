@@ -19,7 +19,7 @@ public class UserService {
 		return userRepository.findOneByEmail(email);
 	}
 
-	// add new user if not already exist
+	// add new user if not already exist else throws exception
 	public User addnew(User user) throws Exception {
 		Optional<User> existingUser = this.getUserByEmail(user.getEmail());
 		if (existingUser.isEmpty()) {

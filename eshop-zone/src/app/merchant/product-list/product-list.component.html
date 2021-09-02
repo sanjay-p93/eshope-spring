@@ -29,7 +29,7 @@
         <td class="col-2">{{product.category}}</td>
         <td class="col-2">
           <button routerLink="/edit/{{product.id}}" class="btn btn-dark btn-sm mr-3 mb-1 icon"><mat-icon [inline]="true">create</mat-icon></button>
-          <button (click)="delete(product.id,i)" class="btn btn-dark btn-sm mb-1 icon"><mat-icon [inline]="true">delete</mat-icon></button>
+          <button (click)="delete(product.id,i,product.name)" class="btn btn-dark btn-sm mb-1 icon"><mat-icon [inline]="true">delete</mat-icon></button>
         </td>
       </tr>
     </tbody>
