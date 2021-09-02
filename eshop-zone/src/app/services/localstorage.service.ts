@@ -30,6 +30,15 @@ export class LocalstorageService {
     return "";
   }
 
+  getRole(){
+      return localStorage.getItem('eshopZoneRole')
+
+  }
+
+  getCartItemCount(){
+    return localStorage.getItem('eshopZoneCartCount');
+  }
+
   clear(){
     localStorage.clear();
   }

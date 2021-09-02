@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CatalogueService } from 'src/app/services/catalogue.service';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 import { ProductService } from 'src/app/services/product.service';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 
@@ -15,9 +16,9 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private catalogueService: CatalogueService,
     private productService:ProductService,
     private router: Router,
+    private navBarService:NavBarService
   ) {}
 
   product!:Product;
@@ -27,7 +28,7 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name:                 ["",[Validators.required,Validators.maxLength(25)]],
       description :         ["",Validators.required],
-      price :               ["",[Validators.required,Validators.pattern("^[0-9]{1,4}$")]],
+      price :               ["",[Validators.required,Validators.pattern("^[0-9]{1,5}$")]],
       category :            ["",[Validators.required]],
       imageUrl :            [""]
     });
@@ -51,6 +52,8 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.navBarService.displayNav();
     this.createForm();
   }
 }

@@ -14,7 +14,7 @@
 </div>
 <div class="list col-12">
     <mat-card class="card col-lg-4"  *ngFor="let product of products; let i=index" [class.mat-elevation-z3]="true">
-        <img mat-card-image [src]="product.imageUrl" alt="Photo of a Shiba Inu">
+        <img mat-card-image [src]="product.imageUrl"  (error)="imgErrorHandler($event)" alt="">
         <mat-card-content>
             <mat-card-title>{{product.name}}</mat-card-title>
             <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
@@ -22,10 +22,10 @@
         </mat-card-content>
         <mat-card-actions class="action">
             <span class="price inline-block">₹&nbsp;{{product.price}}</span>
-            <span *ngIf="!itemQtyMap.has(product.id) && isLoggedIn">
+            <span *ngIf="!itemQtyMap.has(product.id) && isLoggedCustomer">
                 <button [disabled]="isRequest" class="btn btn-light btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
             </span>
-            <span *ngIf="itemQtyMap.has(product.id) && isLoggedIn">
+            <span *ngIf="itemQtyMap.has(product.id) && isLoggedCustomer">
                 <button [disabled]="isRequest" (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
             </span>
         </mat-card-actions>

@@ -21,7 +21,7 @@ export class OrderService {
     let url: string= this.orderUrl+"getall";
     return this.http.get<Order[]>(url)
       .pipe(
-        catchError(this.handleError<Order[]>('Cart retrival', []))
+        catchError(this.handleError<Order[]>('Order retrival', []))
       );
   }
 
@@ -30,7 +30,7 @@ export class OrderService {
     let url: string= this.orderUrl+"userorders/"+this.localstorageService.getUserId();
     return this.http.get<Order[]>(url)
       .pipe(
-        catchError(this.handleError<Order[]>('Cart retrival', []))
+        catchError(this.handleError<Order[]>('Order retrival', []))
       );
   }
 
@@ -38,7 +38,7 @@ export class OrderService {
     let url: string= this.orderUrl+"order/"+orderId;
     return this.http.get<Order>(url)
       .pipe(
-        catchError(this.handleError<Order>('Cart retrival', undefined))
+        catchError(this.handleError<Order>('Order retrival', undefined))
       );
   }
 
@@ -46,7 +46,7 @@ export class OrderService {
     let url: string= this.orderUrl+"complete/"+orderId;
     return this.http.get<Order>(url)
       .pipe(
-        catchError(this.handleError<Order>('Cart retrival', undefined))
+        catchError(this.handleError<Order>('Completion process', undefined))
       );
   }
 
@@ -54,7 +54,7 @@ export class OrderService {
     let url: string= this.orderUrl+"cancel/"+orderId;
     return this.http.get<Order>(url)
       .pipe(
-        catchError(this.handleError<Order>('Cart retrival', undefined))
+        catchError(this.handleError<Order>('Cancel process', undefined))
       );
   }
 

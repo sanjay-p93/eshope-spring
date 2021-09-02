@@ -3,7 +3,8 @@
   <div  routerLink="/home" class="app-name">Eshop-Zone</div>
   <div>
 
-    <span *ngIf="isLoggedIn" routerLink="/productlist" class="nav-option">Dashboard</span>
+    <span *ngIf="isLoggedIn" routerLink="/home" class="nav-option">Home</span>
+    <span *ngIf="isLoggedIn && userRole=='ADMIN'" routerLink="/productlist" class="nav-option">Dashboard</span>
       <span *ngIf="isLoggedIn" routerLink="/orders" class="nav-option">Orders</span>
       <span  *ngIf="isLoggedIn"> 
         <mat-icon [matMenuTriggerFor]="beforeMenu" class="nav-icon">account_circle</mat-icon>
@@ -13,7 +14,7 @@
         </mat-menu>
       </span>
       <span>
-        <mat-icon  *ngIf="isLoggedIn"   routerLink="/cart" class="nav-icon" [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount==0" >shopping_cart</mat-icon>
+        <mat-icon  *ngIf="isLoggedIn && userRole=='CUSTOMER'"  routerLink="/cart" class="nav-icon" [matBadge]="cartItemCount" matBadgeColor="warn" [matBadgeHidden]="cartItemCount==0" >shopping_cart</mat-icon>
       </span>
 
       <span *ngIf="!isLoggedIn" routerLink="/signin" class="nav-option">Log In</span>

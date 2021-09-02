@@ -19,12 +19,15 @@ export class NavBarComponent implements OnInit {
   isActive:boolean=true;
   isLoggedIn:boolean=false;
   cartItemCount:number=0;
+  userRole?:string="";
 
   setNavBar(){
     this.navBarService.isActive$.subscribe(isActive=>{
-        this.isActive=isActive;
-      if(this.localstorageService.getUser()){
+      this.isActive=isActive;
+      const role =this.localstorageService.getRole();
+      if(role){
         this.isLoggedIn=true;
+        this.userRole=role;
       }
       else{
         this.isLoggedIn=false;

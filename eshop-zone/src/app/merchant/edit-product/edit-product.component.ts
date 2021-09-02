@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CatalogueService } from 'src/app/services/catalogue.service';
+import { NavBarService } from 'src/app/services/nav-bar.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class EditProductComponent implements OnInit {
     private catalogueService: CatalogueService,
     private productService:ProductService,
     private router: Router,
+    private navBarService:NavBarService
   ) {}
 
   product!:Product;
@@ -29,7 +31,7 @@ export class EditProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name:                 ["",[Validators.required,Validators.maxLength(25)]],
       description :         ["",Validators.required],
-      price :               ["",Validators.required],
+      price :               ["",[Validators.required,Validators.pattern("^[0-9]{1,5}$")]],
       category :            ["",[Validators.required]],
       imageUrl :            ["",[Validators.required]]
     });
@@ -85,7 +87,7 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.navBarService.displayNav();
     this.route.params.subscribe(params => {
       this.getProduct(params['id']);
     });

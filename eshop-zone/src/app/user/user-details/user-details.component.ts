@@ -31,13 +31,13 @@ export class UserDetailsComponent implements OnInit {
       password : ['',Validators.required],
       confimPassword : ['',Validators.required],
       email : [""],
-      phone : [''],
+      phone : ['',Validators.pattern("^[0-9]{10}$")],
       address : this.fb.group({
         building: [''],
         street:   [''],
         landmark: [''],
         city:     [''],
-        zip:     [''],
+        zip:     ['',Validators.pattern("^[0-9]{6}$")],
       })
     }, { validators: PasswordValidator });
     this.userForm.disable();

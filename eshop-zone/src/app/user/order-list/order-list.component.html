@@ -11,8 +11,8 @@
 
     <mat-expansion-panel class="mt-1" *ngFor="let order of orders; let i=index">
         <mat-expansion-panel-header>
-        <mat-panel-title>
-            <b>#{{order.id}}</b>
+        <mat-panel-title class="text-muted">
+           Order Id : <b>#{{order.id}}</b>
         </mat-panel-title>
         <mat-panel-description class="description">
             <span>{{order.items.length}}&nbsp;Items</span>

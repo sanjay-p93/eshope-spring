@@ -13,7 +13,7 @@
                     <div class="row item-card" *ngFor="let item of cart.items; let i=index">
                             <div class="col-3">
                                 <div class="image">
-                                    <img  [src]="item.imageUrl" alt="Item image">
+                                    <img  [src]="item.imageUrl"   (error)="imgErrorHandler($event)" alt="">
                                 </div>
                                 
                             </div>

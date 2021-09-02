@@ -59,6 +59,8 @@ export class CheckoutComponent implements OnInit {
     };
     this.cartService.checkOut(checkoutDetails).subscribe(data=>{
       if(data){
+
+        this.navBarService.setItemCount(0);
         this.router.navigate(['orders']);
       }
     });

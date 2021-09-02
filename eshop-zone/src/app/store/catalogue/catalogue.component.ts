@@ -34,12 +34,17 @@ export class CatalogueComponent implements OnInit {
   itemQtyMap= new Map();  
   products: Product[] = [];
   cart:Cart= <Cart>{};
-  isLoggedIn:boolean=false;
   isRequest:boolean=false;
+  isLoggedCustomer:boolean=false
 
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+   
+  imgErrorHandler(event:any) {
+    event.target.src = './assets/img/altImg.png';
+  }
 
   getAllProducts(): void {
     this.isRequest=true;
@@ -53,16 +58,18 @@ export class CatalogueComponent implements OnInit {
     this.isRequest=true;
     this.catalogueService.getByCategory(category)
       .subscribe(data => this.products = data);
+
       this.getCart();
       this.isRequest=false;
   }
 
   getCart(): void {
-    this.isLoggedIn=false;
-    if(!this.localstorageService.getUser()){
+    this.isLoggedCustomer=false;
+    if(!this.localstorageService.getUser()||!this.localstorageService.getRole()||(this.localstorageService.getRole()=='ADMIN')){
+      console.log("admin cant enter");
       return;
     }
-    this.isLoggedIn=true;
+    this.isLoggedCustomer=true;
     this.isRequest=true;
     this.cartService.getCart()
       .subscribe(data => {
@@ -118,7 +125,7 @@ export class CatalogueComponent implements OnInit {
   setAsLoggedIn(){
     this.userService.isLoggedIn$.subscribe(
       isLoggedIn=>{
-        this.isLoggedIn=isLoggedIn;
+        this.isLoggedCustomer=isLoggedIn;
       }
     );
   }

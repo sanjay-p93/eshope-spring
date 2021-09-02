@@ -24,6 +24,10 @@ export class CartComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
+  imgErrorHandler(event:any) {
+    event.target.src = './assets/img/altImg.png';
+  }
+
   getCart(){
     if(this.isDisabled){
       return;
@@ -88,7 +92,7 @@ export class CartComponent implements OnInit {
 
   stepDown(idx:number,item:CartItem){
 
-    if(item.quantity<1){
+    if(item.quantity<2){
       this.removeFromCart(item);
       return;
     }
