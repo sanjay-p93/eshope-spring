@@ -12,24 +12,24 @@
     <table class="table">
     <thead>
       <tr>
-        <th scope="col-1">#</th>
-        <th scope="col-3">Name</th>
-        <th scope="col-3">Description</th>
-        <th scope="col-1">Price</th>
-        <th scope="col-2">Category</th>
-        <th scope="col-2">Action</th>
+        <th class="col-1">#</th>
+        <th class="col-2">Name</th>
+        <th class="col-4">Description</th>
+        <th class="col-1">Price ₹ </th>
+        <th class="col-2">Category</th>
+        <th class="col-2">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>
-          <button routerLink="/edit/{{id}}" class="btn btn-dark btn-sm mr-3 icon"><mat-icon [inline]="true">create</mat-icon></button>
-          <button (click)="delete('')" class="btn btn-dark btn-sm icon"><mat-icon [inline]="true">delete</mat-icon></button>
+      <tr  *ngFor="let product of products; let i=index">
+        <th class="col-1">{{i+1}}</th>
+        <td class="col-2">{{product.name}}</td>
+        <td class="col-4">{{product.description}}</td>
+        <td class="col-1">{{product.price}}</td>
+        <td class="col-2">{{product.category}}</td>
+        <td class="col-2">
+          <button routerLink="/edit/{{product.id}}" class="btn btn-dark btn-sm mr-3 mb-1 icon"><mat-icon [inline]="true">create</mat-icon></button>
+          <button (click)="delete(product.id,i)" class="btn btn-dark btn-sm mb-1 icon"><mat-icon [inline]="true">delete</mat-icon></button>
         </td>
       </tr>
     </tbody>

@@ -21,16 +21,10 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
-	@PostMapping("/add")
-	@ApiOperation(value = "Add new product", notes = "Provide a product model to add new product")
-	public void addnew(@RequestBody Product product, BindingResult result) {
-		productService.save(product);
-	}
-
-	@PostMapping("/update")
-	@ApiOperation(value = "Update a product", notes = "Provide a product model with Id to update a specific product")
-	public void update(@RequestBody Product product, BindingResult result) {
-		productService.save(product);
+	@PostMapping("/save")
+	@ApiOperation(value = "Add or Update product", notes = "Provide a product model to add new product or Provide a product model with Id to update a specific product")
+	public Product addnew(@RequestBody Product product, BindingResult result) {
+		return productService.save(product);
 	}
 
 	@DeleteMapping("/delete/{id}")

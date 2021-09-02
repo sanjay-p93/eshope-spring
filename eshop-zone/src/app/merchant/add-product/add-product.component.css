@@ -2,3 +2,7 @@
 .form-control.is-invalid{
     background-image: none;
 }
+
+button{
+    width: 75px;
+}

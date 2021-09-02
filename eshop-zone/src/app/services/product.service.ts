@@ -1,18 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { TopUp } from '../models/topUp';
-import { Wallet } from '../models/wallet';
+import { Product } from '../models/product';
 import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WalletService {
+export class ProductService {
 
-
-  private walletUrl = 'http://localhost:8080/wallet/';
+  private productUrl = 'http://localhost:8080/product/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,20 +21,22 @@ export class WalletService {
     private localstorageService: LocalstorageService
   ) { }
 
-  getWallet(): Observable<Wallet> {
-    let url: string= this.walletUrl+"check/"+this.localstorageService.getUserId();
-    return this.http.get<Wallet>(url).pipe(
-        catchError(this.handleError<Wallet>('Wallet retrival ',undefined))
+  saveProduct(product:Product): Observable<Product> {
+    const url: string =this.productUrl+"save";
+    return this.http.post<Product>(url,product,this.httpOptions)
+      .pipe(
+        catchError(this.handleError<Product>('Save operatoin ',undefined))
       );
   }
 
-  createOrTopUP(amount:number,service:string): Observable<Wallet> {
-    let url: string= this.walletUrl+service;
-    let topup:TopUp={userId:this.localstorageService.getUserId(),balance:amount};
-    return this.http.post<Wallet>(url,topup,this.httpOptions).pipe(
-      catchError(this.handleError<Wallet>(`Request to ${service} `,undefined))
-    );
+  deleteProduct(productId:string): Observable<any> {
+    const url: string =this.productUrl+"delete/"+productId;
+    return this.http.delete<any>(url)
+      .pipe(
+        catchError(this.handleError<any>('Delete operation',"FAILED"))
+      );
   }
+
 
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -59,4 +59,5 @@ export class WalletService {
       return of(result as T);
     };
   }
+
 }

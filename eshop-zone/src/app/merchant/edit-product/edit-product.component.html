@@ -30,10 +30,15 @@
                     <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">price is required</small>
                 </div>
                 <div class="form-group col-md-10">
-                    <label class="control-label text-secondary">category</label>
-                    <input [class.is-invalid]="productForm.get('category')?.invalid && productForm.get('category')?.touched " 
-                        formControlName="category" type="text" class="form-control" >
-                    <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="text-danger">Namcategorye is required</small>
+                    <label class="control-label text-secondary">Category</label>
+                    <select [class.is-invalid]="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+                    formControlName="category"  class="form-control col-md-6">
+                        <option value="BOOKS">Books</option>
+                        <option value="ELECTRONICS">Electronics</option>
+                        <option value="APPAREL">Apparel</option>
+                        <option value="PERSONAL-CARE">Personal-Care</option>
+                    </select>
+                    <small *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="text-danger">Category is required</small>
                 </div>
                 <div class="form-group col-md-10">
                     <label class="control-label text-secondary">imageUrl</label>
@@ -43,8 +48,10 @@
                 </div>
 
                 <div class="form-group col-md-10 ">
-                    <button type="submit" class="btn btn-dark mr-2">&nbsp; Add &nbsp;</button>
-                    <input type="button" routerLink="/productlist" class="btn btn-light" value="Cancel"/>
+                    <button *ngIf="!isEdit" (click)="edit()" class="btn btn-dark mr-2">Edit</button>
+                    <button *ngIf="!isEdit" routerLink="/productlist" type="submit" class="btn btn-light">Back</button>
+                    <button *ngIf="isEdit" type="submit" class="btn btn-dark  mr-2"> Save</button>
+                    <button *ngIf="isEdit" (click)="cancelEdit()" class="btn btn-light"> Cancel</button>
                 </div>
         </form>
     </div>

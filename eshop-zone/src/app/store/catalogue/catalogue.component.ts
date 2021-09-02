@@ -117,8 +117,8 @@ export class CatalogueComponent implements OnInit {
   }
   setAsLoggedIn(){
     this.userService.isLoggedIn$.subscribe(
-      isLoggedIn=>{this.isLoggedIn=isLoggedIn;
-        console.log("this works");
+      isLoggedIn=>{
+        this.isLoggedIn=isLoggedIn;
       }
     );
   }

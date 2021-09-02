@@ -29,6 +29,14 @@ export class CatalogueService {
       );
   }
 
+  getById(id: string): Observable<Product> {
+    let getAllUrl: string= this.catalogueUrl+"product/"+id;   
+    return this.http.get<Product>(getAllUrl)
+      .pipe(
+        catchError(this.handleError<Product>('Catalouge retrival', undefined))
+      );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
