@@ -34,14 +34,14 @@ public class WalletController {
 
 	@PostMapping("/add")
 	@ApiOperation(value = "Add new wallet", notes = "Provide user Id and balance to add wallet")
-	public void addnew(@RequestBody Wallet wallet, BindingResult result) {
-		walletService.add(wallet);
+	public Wallet addnew(@RequestBody Wallet wallet, BindingResult result) {
+		return walletService.add(wallet);
 	}
 
 	@PostMapping("/topup")
 	@ApiOperation(value = "Add amount to wallet", notes = "Provide user Id and balance amount to be added wallet")
-	public void topup(@RequestBody Topup topup, BindingResult result) {
-		walletService.topup(topup);
+	public Wallet topup(@RequestBody Topup topup, BindingResult result) throws Exception {
+		return walletService.topup(topup);
 	}
 
 

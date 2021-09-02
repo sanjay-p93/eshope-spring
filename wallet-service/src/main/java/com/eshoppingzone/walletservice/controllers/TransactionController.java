@@ -19,14 +19,14 @@ public class TransactionController {
 
 	@GetMapping("/complete/{txnId}")
 	@ApiOperation(value = "Complete a transaction by Id", notes = "Provide id to complete a specific transaction", response = String.class)
-	public String complete(@PathVariable String txnId) {
+	public String complete(@PathVariable String txnId) throws Exception {
 		transactionService.completeTransaction(txnId);
 		return "ok complted";
 	}
 
 	@GetMapping("/refund/{txnId}")
 	@ApiOperation(value = "Refund a transaction by Id", notes = "Provide id to refund a specific transaction", response = String.class)
-	public String findById(@PathVariable String txnId) {
+	public String findById(@PathVariable String txnId) throws Exception {
 		transactionService.refundTransaction(txnId);
 		return "ok refunded";
 	}

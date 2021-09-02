@@ -7,7 +7,7 @@ import { OrderComponent } from './order/order.component';
 import { MaterialModule } from '../material/material.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { OrderListComponent } from './order-list/order-list.component';
 
 
@@ -23,7 +23,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     CommonModule,
     UserRoutingModule,
     MaterialModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule ,
+    FormsModule
   ]
 })
 export class UserModule { }

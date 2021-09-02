@@ -11,9 +11,7 @@ import { LocalstorageService } from './localstorage.service';
 export class OrderService {
 
   private orderUrl = 'http://localhost:8080/orders/';
-
-
-
+  
   constructor(
     private http: HttpClient,
     private localstorageService: LocalstorageService

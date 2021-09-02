@@ -40,7 +40,7 @@ public class TransactionService {
 
 
 	// Completing transaction
-	public void completeTransaction(String txnId) {
+	public void completeTransaction(String txnId) throws Exception {
 		Optional<Transaction> TRANSACTION = this.findById(txnId);
 		if (TRANSACTION.isPresent()) {
 			Transaction transaction = TRANSACTION.get();
@@ -57,7 +57,7 @@ public class TransactionService {
 	}
 
 	// Refunding transaction
-	public void refundTransaction(String txnId) {
+	public void refundTransaction(String txnId) throws Exception {
 		Optional<Transaction> TRANSACTION = this.findById(txnId);
 		if (TRANSACTION.isPresent()) {
 			Transaction transaction = TRANSACTION.get();
@@ -74,7 +74,7 @@ public class TransactionService {
 	}
 
 	// Transferring transaction balance
-	public void updateBalance(String id, BigDecimal balance) {
+	public void updateBalance(String id, BigDecimal balance) throws Exception {
 		Topup destinationTopUp = new Topup();
 		destinationTopUp.setBalance(balance);
 		destinationTopUp.setUserId(id);

@@ -28,27 +28,28 @@ public class WalletService {
 		return walletRepository.findOneByUserId(userId);
 	}
 
-	// Add changes to wallet
-	public void add(Wallet wallet) {
+	// Add new wallet
+	public Wallet add(Wallet wallet) {
+
 		wallet.setPendingTransactions(Arrays.asList());
-		this.walletRepository.save(wallet);
+		return this.walletRepository.save(wallet);
 	}
 
 	// save changes to wallet
-	public void save(Wallet wallet) {
-		this.walletRepository.save(wallet);
+	public Wallet save(Wallet wallet) {
+		return this.walletRepository.save(wallet);
 	}
 
 	// add balance to wallet
-	public void topup(Topup topup) {
+	public Wallet topup(Topup topup) throws Exception {
 		Optional<Wallet> wallet = this.findById(topup.getUserId());
 		if(wallet.isPresent()){
 			Wallet userWallet = wallet.get();
 			BigDecimal newBal = userWallet.getBalance().add(topup.getBalance());
 			userWallet.setBalance(newBal);
-			this.save(userWallet);
+			return this.save(userWallet);
 		}else{
-			// no user wallet found.
+			throw new Exception("Wallet not found.");
 		}
 	}
 
@@ -77,14 +78,14 @@ public class WalletService {
 	}
 
 	// Update pending transaction
-	public void updatePendingTxn(String userId, String txnId) {
+	public void updatePendingTxn(String userId, String txnId) throws Exception {
 		Optional<Wallet> wallet = this.findById(userId);
 		if (wallet.isPresent()) {
 			Wallet userWallet = wallet.get();
 			userWallet.removePendingTransaction(txnId);
 			this.save(userWallet);
 		} else {
-			// no user wallet found.
+			throw new Exception("Wallet not found.");
 		}
 	}
 
