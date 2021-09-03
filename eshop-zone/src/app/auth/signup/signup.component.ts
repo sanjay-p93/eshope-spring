@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit {
     ) { }
 
   signupForm!: FormGroup;
+  passwordEmpty:boolean=false;
 
   setUserDetails(){
     this.signupForm = this.formBuilder.group({
@@ -37,6 +38,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp(){
+    
     if(!this.signupForm.valid) {
       this.signupForm.markAllAsTouched();
       return

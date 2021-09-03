@@ -15,11 +15,13 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { HeaderIntercepterService } from './services/header-intercepter.service';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
