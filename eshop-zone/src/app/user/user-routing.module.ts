@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RegisteredUserGuardGuard } from '../authguards/registered-user-guard.guard';
 import { OrderListComponent } from './order-list/order-list.component';
-import { OrderComponent } from './order/order.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = 
 [
-  {path: 'profile', component: ProfileComponent},
-  {path: 'order/{id}', component: OrderComponent},
-  {path: 'orders', component: OrderListComponent}
+  {path: 'profile', component: ProfileComponent,canActivate: [RegisteredUserGuardGuard]},
+  {path: 'orders', component: OrderListComponent,canActivate: [RegisteredUserGuardGuard]}
 ];
 
 @NgModule({
