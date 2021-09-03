@@ -32,7 +32,6 @@ public class CatalogueService {
 	// get product by name
 	public List<Product> getProductByName(String name) {
 		name = "\\b" + name + ".*\\b";
-		System.out.println(name);
 		return productRepository.findByNameRegex(name);
 	}
 }

@@ -36,9 +36,6 @@ public class JWTFilter extends OncePerRequestFilter {
 		String token = null;
 		String userName = null;
 
-		System.out.println("--------Auth header--------\n\n");
-		System.out.println(authorization);
-		System.out.println("\\n\\n----------------");
 
 		if (null != authorization && authorization.startsWith("Bearer ")) {
 			token = authorization.substring(7);

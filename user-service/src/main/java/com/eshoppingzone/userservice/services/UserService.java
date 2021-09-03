@@ -34,8 +34,6 @@ public class UserService {
 	// save updated user
 	public User save(User user) throws Exception {
 		Optional<User> USER = this.getUserByEmail(user.getEmail());
-		System.out.println("------------- \n\n");
-		System.out.println(user);
 		if (USER.isPresent()) {
 			User existingUser = USER.get();
 			user.setRole(existingUser.getRole());

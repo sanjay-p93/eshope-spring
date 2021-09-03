@@ -57,8 +57,7 @@ public class OrderService {
 			Order order = ORDER.get();
 			if (order.getPaymentType().equals("WALLET")) {
 				String uri = "http://WALLET-SERVICE/transaction/complete/" + order.getTransactionId();
-				String msg = restTemplate.getForObject(uri, String.class);
-				System.out.println(msg);
+				restTemplate.getForObject(uri, String.class);
 			}
 			order.setOrderStatus("COMPLETED");
 			return orderRepository.save(order);
@@ -76,8 +75,7 @@ public class OrderService {
 			Order order = ORDER.get();
 			if (order.getPaymentType().equals("WALLET")) {
 				String uri = "http://WALLET-SERVICE/transaction/refund/" + order.getTransactionId();
-				String msg = restTemplate.getForObject(uri, String.class);
-				System.out.println(msg);
+				restTemplate.getForObject(uri, String.class);
 			}
 			order.setOrderStatus("CANCELLED");
 			return orderRepository.save(order);

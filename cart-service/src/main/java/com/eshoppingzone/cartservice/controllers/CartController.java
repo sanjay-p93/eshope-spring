@@ -51,7 +51,6 @@ public class CartController {
 	@PostMapping("/deleteItem")
 	@ApiOperation(value = "Delete item in a cart", notes = "Provide a user id and item id to delete cart item")
 	public Cart deleteItem(@RequestBody WrapperUserIdItemId wrapper, BindingResult result) throws Exception {
-		System.out.println(result);
 		return cartService.deleteItem(wrapper);
 	}
 

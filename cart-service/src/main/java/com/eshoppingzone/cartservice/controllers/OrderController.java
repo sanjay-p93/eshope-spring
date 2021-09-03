@@ -31,7 +31,6 @@ public class OrderController {
 	@GetMapping("/getByStatus/{status}")
 	@ApiOperation(value = "Retrieves orders by order status", notes = "Provide status to look up orders", response = Order.class, responseContainer = "List")
 	public List<Order> getPending(@PathVariable String status) {
-		System.out.println(status);
 		return orderService.getByStatus(status);
 	}
 
