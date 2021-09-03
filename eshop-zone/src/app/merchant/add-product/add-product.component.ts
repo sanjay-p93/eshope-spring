@@ -45,7 +45,7 @@ export class AddProductComponent implements OnInit {
     this.productService.saveProduct(newProduct).subscribe(data=>{
       console.log(data);
       if(data){
-        this.router.navigate(['productlist']);
+        this.router.navigate(['merchant']);
       }
       this.product=data;
     })

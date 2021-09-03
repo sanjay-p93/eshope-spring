@@ -76,7 +76,7 @@ export class EditProductComponent implements OnInit {
     this.productService.saveProduct(formValue).subscribe(data=>{
       console.log(data);
       if(!data){
-        this.router.navigate(['productlist']);
+        this.router.navigate(['merchant']);
       }
       this.product=data;
       this.setProductDetails();

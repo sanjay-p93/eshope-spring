@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.eshoppingzone.gateway.model.user;
 
-public interface userDetails extends MongoRepository<user, String> {
+public interface UserRepository extends MongoRepository<user, String> {
 
 
 	Optional<user> findOneByEmail(String username);

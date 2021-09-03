@@ -3,7 +3,7 @@
 <div class="col-lg-12 center-item">
     <div class="col-12 mt-5 mb-2 list-head">
         <h1 class="head">Orders</h1>
-        <button routerLink="/add" class="btn btn-dark add"><mat-icon>add</mat-icon></button>
+        <button routerLink="/merchant/add" class="btn btn-dark add"><mat-icon>add</mat-icon></button>
         
                      
     </div>   
@@ -28,7 +28,7 @@
         <td class="col-1">{{product.price}}</td>
         <td class="col-2">{{product.category}}</td>
         <td class="col-2">
-          <button routerLink="/edit/{{product.id}}" class="btn btn-dark btn-sm mr-3 mb-1 icon"><mat-icon [inline]="true">create</mat-icon></button>
+          <button routerLink="/merchant/edit/{{product.id}}" class="btn btn-dark btn-sm mr-3 mb-1 icon"><mat-icon [inline]="true">create</mat-icon></button>
           <button (click)="delete(product.id,i,product.name)" class="btn btn-dark btn-sm mb-1 icon"><mat-icon [inline]="true">delete</mat-icon></button>
         </td>
       </tr>

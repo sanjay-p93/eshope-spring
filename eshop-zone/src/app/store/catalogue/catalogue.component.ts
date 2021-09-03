@@ -66,7 +66,6 @@ export class CatalogueComponent implements OnInit {
   getCart(): void {
     this.isLoggedCustomer=false;
     if(!this.localstorageService.getUser()||!this.localstorageService.getRole()||(this.localstorageService.getRole()=='ADMIN')){
-      console.log("admin cant enter");
       return;
     }
     this.isLoggedCustomer=true;

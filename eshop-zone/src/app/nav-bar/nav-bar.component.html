@@ -4,7 +4,7 @@
   <div>
 
     <span *ngIf="isLoggedIn" routerLink="/home" class="nav-option">Home</span>
-    <span *ngIf="isLoggedIn && userRole=='ADMIN'" routerLink="/productlist" class="nav-option">Dashboard</span>
+    <span *ngIf="isLoggedIn && userRole=='ADMIN'" routerLink="/merchant" class="nav-option">Dashboard</span>
       <span *ngIf="isLoggedIn" routerLink="/orders" class="nav-option">Orders</span>
       <span  *ngIf="isLoggedIn"> 
         <mat-icon [matMenuTriggerFor]="beforeMenu" class="nav-icon">account_circle</mat-icon>

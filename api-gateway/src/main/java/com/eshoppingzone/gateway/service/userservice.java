@@ -13,13 +13,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.eshoppingzone.gateway.model.user;
-import com.eshoppingzone.gateway.repository.userDetails;
+import com.eshoppingzone.gateway.repository.UserRepository;
 
 @Service
 public class userservice implements UserDetailsService {
 
 	@Autowired
-	userDetails details;
+	UserRepository details;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
