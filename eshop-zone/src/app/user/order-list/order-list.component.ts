@@ -71,9 +71,6 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.navBarService.displayNav();
     this.user=this.localstorageService.getUser();
-    if(!this.user){
-      this.userService.logOut();
-    }
     this.getOrders();
   }
 

@@ -9,8 +9,8 @@ export class HeaderIntercepterService implements HttpInterceptor {
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-    if (httpRequest.url.includes("catalogue/")||httpRequest.url.includes("gateway/authenticate")
-          ||httpRequest.url.includes("users/signup")) {
+    if (httpRequest.url.includes("catalogue/")||httpRequest.url.includes("eshop/authenticate")
+          ||httpRequest.url.includes("eshop/signup")) {
       console.log("no porobs here "+httpRequest.url);      
       return next.handle(httpRequest);
     }
