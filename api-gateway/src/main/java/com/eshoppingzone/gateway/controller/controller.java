@@ -69,16 +69,4 @@ public class controller {
 		}
 	}
 
-	@PostMapping("/save")
-	public user update(@RequestBody user user, BindingResult result) throws Exception {
-
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		try {
-			String uri = "http://localhost:8081/users/save";
-			ResponseEntity<user> response = restTemplate.postForEntity(uri, user, user.class);
-			return response.getBody();
-		} catch (Exception e) {
-			throw new Exception("Profile update failed", e);
-		}
-	}
 }

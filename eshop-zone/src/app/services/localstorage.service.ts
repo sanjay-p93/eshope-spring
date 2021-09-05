@@ -15,6 +15,7 @@ export class LocalstorageService {
   getUser(){
     var USER = localStorage.getItem('eshopZoneUser');
     if(USER){
+      console.log(USER);
       let user: User = JSON.parse(USER);
       return user;
     }
@@ -32,7 +33,6 @@ export class LocalstorageService {
 
   getRole(){
       return localStorage.getItem('eshopZoneRole')
-
   }
 
   getCartItemCount(){

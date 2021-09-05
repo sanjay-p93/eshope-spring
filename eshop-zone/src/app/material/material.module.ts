@@ -15,6 +15,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const material =
@@ -33,7 +34,8 @@ const material =
     MatPaginatorModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressSpinnerModule
     
     
   ];

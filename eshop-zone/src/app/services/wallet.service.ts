@@ -30,6 +30,13 @@ export class WalletService {
       );
   }
 
+  getShopWallet(): Observable<Wallet> {
+    let url: string= this.walletUrl+"check/eshope";
+    return this.http.get<Wallet>(url).pipe(
+        catchError(this.handleError<Wallet>('Wallet retrival ',undefined))
+      );
+  }
+
   createOrTopUP(amount:number,service:string): Observable<Wallet> {
     let url: string= this.walletUrl+service;
     let topup:TopUp={userId:this.localstorageService.getUserId(),balance:amount};

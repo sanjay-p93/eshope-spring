@@ -24,6 +24,7 @@ export class OrderListComponent implements OnInit {
   orders:Order[]=[];
   orderList:Order[]=[];
   status:string="";
+  isLoaded:boolean=false;
 
   setList(status:string){
     this.status=status;
@@ -35,6 +36,7 @@ export class OrderListComponent implements OnInit {
         return order.orderStatus == this.status
       })
     }
+    this.isLoaded=true
   }
 
   getOrders(){

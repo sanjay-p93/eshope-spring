@@ -12,7 +12,6 @@ import { User } from '../models/user';
 export class UserService {
 
   private userUrl = 'http://localhost:8080/users/'; 
-  private updateUrl = 'http://localhost:8080/eshop/save'; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -46,7 +45,11 @@ export class UserService {
   }
 
   updateDetails(user: User) {
-    return this.http.post<User>(this.updateUrl,user,this.httpOptions)
+    console.log(user);
+    let url:string=this.userUrl+"save";
+
+    console.log(url);
+    return this.http.post<User>(url,user,this.httpOptions)
       .pipe(
         catchError(this.handleError<User>('User detail updation',undefined))
       );

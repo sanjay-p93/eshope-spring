@@ -20,8 +20,7 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private navBarService:NavBarService,
     private authService:AuthService,
-    private router: Router,
-    private userService:UserService
+    private router: Router
     ) { }
 
   signupForm!: FormGroup;

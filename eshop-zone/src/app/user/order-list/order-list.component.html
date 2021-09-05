@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="form-group col-10 "><h2>Orders</h2></div>
 
-        <div class="form-group col-2" *ngIf="orders.length!=0">
+        <div class="form-group col-2" *ngIf="orders.length!=0 && isLoaded">
             <select [ngModel]="status" (ngModelChange)="setList($event)" class="form-control col-12">
                         <option value="">All</option>
                         <option value="PENDING">Pending</option>
@@ -14,8 +14,8 @@
             </select>
         </div>
     </div> 
-
-    <div *ngIf="orders.length==0" class="alert alert-warning" role="alert">
+    <mat-spinner *ngIf="!isLoaded"></mat-spinner>
+    <div *ngIf="orders.length==0 && isLoaded" class="alert alert-warning" role="alert">
         Seems you have not placed any orders yet. <a routerLink="/home">Click here </a>to start shopping!
     </div>
 
@@ -57,8 +57,8 @@
             </div>
         </div>
         <div class="action">      
-            <button *ngIf="order.orderStatus=='PENDING'" (click)="complete(order)" type="button" class="btn btn-dark btn-sm mr-3">Complete</button>
-            <button *ngIf="order.orderStatus=='PENDING'" (click)="cancel(order)" type="button" class="btn btn-light btn-sm">Cancel</button>
+            <button *ngIf="order.orderStatus=='PENDING' && user?.role=='ADMIN'" (click)="complete(order)" type="button" class="btn btn-dark btn-sm mr-3">Complete</button>
+            <button *ngIf="order.orderStatus=='PENDING'" (click)="cancel(order)" type="button" class="btn btn-light btn-sm">{{user?.role=='ADMIN'?'Reject':'Cancel'}}</button>
         </div>
 
     </mat-expansion-panel>  

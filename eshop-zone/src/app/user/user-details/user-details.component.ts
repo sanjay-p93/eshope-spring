@@ -28,8 +28,6 @@ export class UserDetailsComponent implements OnInit {
 
     this.userForm = this.fb.group({
       name: ['',[Validators.required,Validators.maxLength(25)]],
-      password : ['',Validators.required],
-      confimPassword : ['',Validators.required],
       email : [""],
       phone : ['',Validators.pattern("^[0-9]{10}$")],
       address : this.fb.group({
@@ -48,7 +46,6 @@ export class UserDetailsComponent implements OnInit {
 
     this.userForm.enable();
     this.userForm.patchValue(user);
-    this.userForm.controls['confimPassword'].setValue(user.password);
     this.userForm.disable();
   }
 
@@ -69,7 +66,8 @@ export class UserDetailsComponent implements OnInit {
     }
     this.isEdit=false;
     const formValue = this.userForm.getRawValue();
-    const user  = Object.assign({id:this.localstorageService.getUserId},formValue);
+    const loggedUser=this.localstorageService.getUser();
+    const user  = Object.assign({id:loggedUser?.id,password:loggedUser?.password},formValue);
     this.userService.updateDetails(user).subscribe(result=>{
       this.setUserDetails(result);
       localStorage.setItem('eshopZoneUser', JSON.stringify(result));

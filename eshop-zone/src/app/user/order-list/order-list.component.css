@@ -17,3 +17,8 @@ h3{
 button{
     width: 80px;
 }
+mat-spinner{
+    color: black;
+    margin: 50px auto;
+
+}

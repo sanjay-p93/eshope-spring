@@ -3,6 +3,7 @@
         <app-user-details></app-user-details>
     </div>
     <div class="col-lg-4">
-        <app-user-wallet></app-user-wallet>
+        <app-user-wallet *ngIf="!isAdmin"></app-user-wallet>
+        <app-eshop-wallet *ngIf="isAdmin"></app-eshop-wallet>
     </div>
 </div>

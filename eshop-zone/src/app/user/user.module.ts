@@ -9,6 +9,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserWalletComponent } from './user-wallet/user-wallet.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { OrderListComponent } from './order-list/order-list.component';
+import { EshopWalletComponent } from './eshop-wallet/eshop-wallet.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     OrderComponent,
     UserDetailsComponent,
     UserWalletComponent,
-    OrderListComponent
+    OrderListComponent,
+    EshopWalletComponent
   ],
   imports: [
     CommonModule,
