@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/models/address';
 import { CheckoutDetails } from 'src/app/models/checkoutDetails';
@@ -21,10 +22,15 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private localstorageService: LocalstorageService,
     private cartService:CartService,
     private navBarService: NavBarService
   ) { }
+
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   addressForm!: FormGroup;
   paymentForm!: FormGroup;
@@ -59,12 +65,22 @@ export class CheckoutComponent implements OnInit {
     };
     this.cartService.checkOut(checkoutDetails).subscribe(data=>{
       if(data){
-
         this.navBarService.setItemCount(0);
+        this.snackBar("Your order was successfully placed");
         this.router.navigate(['orders']);
       }
     });
   }
+
+  snackBar(mesage:string){
+    this._snackBar.open(mesage, 'close', {
+      duration: 3 * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+
   ngOnInit(): void {
     this.navBarService.displayNav();
     this.setUserDetails();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CatalogueService } from 'src/app/services/catalogue.service';
@@ -19,14 +20,25 @@ export class EditProductComponent implements OnInit {
     private catalogueService: CatalogueService,
     private productService:ProductService,
     private router: Router,
-    private navBarService:NavBarService
+    private navBarService:NavBarService,
+    private _snackBar: MatSnackBar
   ) {}
 
   product!:Product;
   isEdit:boolean=false;
-
   productForm!: FormGroup;
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
+  snackBar(mesage:string){
+    this._snackBar.open(mesage, 'close', {
+      duration: 3 * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+  
   createForm(){
     this.productForm = this.fb.group({
       name:                 ["",[Validators.required,Validators.maxLength(25)]],
@@ -74,13 +86,13 @@ export class EditProductComponent implements OnInit {
     formValue.id=this.product.id;
     this.productForm.disable();
     this.productService.saveProduct(formValue).subscribe(data=>{
-      console.log(data);
       if(!data){
         this.router.navigate(['merchant']);
       }
       this.product=data;
       this.setProductDetails();
       this.cancelEdit();
+      this.snackBar("Product details updated");
 
     })
 

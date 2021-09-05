@@ -23,6 +23,7 @@ export class NavBarComponent implements OnInit {
 
   setNavBar(){
     this.navBarService.isActive$.subscribe(isActive=>{
+
       this.isActive=isActive;
       const role =this.localstorageService.getRole();
       if(role){
@@ -32,8 +33,9 @@ export class NavBarComponent implements OnInit {
       else{
         this.isLoggedIn=false;
       }
-    });
+      this.cartItemCount=this.localstorageService.getCartItemCount();
 
+    });
   }
 
   setCartItemCount(){

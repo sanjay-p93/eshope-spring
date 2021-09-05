@@ -49,7 +49,9 @@ export class SignupComponent implements OnInit {
         if(result){
           localStorage.setItem('eshopZoneUser', JSON.stringify(result));
           localStorage.setItem('eshopZoneRole', result.role);
+          result.password=formValue.password;
           this.signIn(result);
+
         }
     });
     

@@ -36,7 +36,11 @@ export class LocalstorageService {
   }
 
   getCartItemCount(){
-    return localStorage.getItem('eshopZoneCartCount');
+    var count = localStorage.getItem('eshopZoneItemCount')
+    if(count)
+      return parseInt(count);
+    else
+      return 0;
   }
 
   clear(){

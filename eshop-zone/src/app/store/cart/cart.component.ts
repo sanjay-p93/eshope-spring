@@ -53,9 +53,11 @@ export class CartComponent implements OnInit {
     this.cartService.deleteItem(item).subscribe(data=>{
       this.cart=data;
       if(this.cart){
+        this.snackBar(item.name+" is removed from cart");
         this.navBarService.setItemCount(this.cart.items.length);
       }
       else{
+        this.snackBar(item.name+" is removed from cart");
         this.navBarService.setItemCount(0);
       }
       this.isDisabled=false;

@@ -24,6 +24,7 @@ export class NavBarService {
   }
 
   setItemCount(count:number){
+    localStorage.setItem('eshopZoneItemCount',count.toString());
     this.cartItemCount.next(count);
   }
 }

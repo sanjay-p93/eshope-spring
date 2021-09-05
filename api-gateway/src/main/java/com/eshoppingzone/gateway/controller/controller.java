@@ -57,7 +57,7 @@ public class controller {
 	}
 
 	@PostMapping("/signup")
-	public user authenticate(@RequestBody user user, BindingResult result) throws Exception {
+	public user signup(@RequestBody user user, BindingResult result) throws Exception {
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		try {
@@ -66,6 +66,19 @@ public class controller {
 			return response.getBody();
 		} catch (Exception e) {
 			throw new Exception("SIGN UP FAILED", e);
+		}
+	}
+
+	@PostMapping("/save")
+	public user update(@RequestBody user user, BindingResult result) throws Exception {
+
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		try {
+			String uri = "http://localhost:8081/users/save";
+			ResponseEntity<user> response = restTemplate.postForEntity(uri, user, user.class);
+			return response.getBody();
+		} catch (Exception e) {
+			throw new Exception("Profile update failed", e);
 		}
 	}
 }
