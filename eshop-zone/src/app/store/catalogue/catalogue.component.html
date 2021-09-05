@@ -1,11 +1,11 @@
 <div class="row">
     <div class=" mt-4 mb-4 ml-4 col-lg-8">
         <mat-chip-list aria-label="Fish selection">
-            <mat-chip (click)="getAllProducts()" color="accent" selected>All</mat-chip>
-            <mat-chip (click)="getByCategory('BOOKS')" color="accent" selected>Books </mat-chip>
-            <mat-chip (click)="getByCategory('ELECTRONICS')" color="accent" selected>Electronics</mat-chip>
-            <mat-chip (click)="getByCategory('APPAREL')" color="accent" selected>Apparel</mat-chip>
-            <mat-chip (click)="getByCategory('PERSONAL-CARE')" color="accent" selected>Personal Care</mat-chip>
+            <mat-chip (click)="setList('All')" color="accent" selected>All</mat-chip>
+            <mat-chip (click)="setList('BOOKS')" color="accent" selected>Books </mat-chip>
+            <mat-chip (click)="setList('ELECTRONICS')" color="accent" selected>Electronics</mat-chip>
+            <mat-chip (click)="setList('APPAREL')" color="accent" selected>Apparel</mat-chip>
+            <mat-chip (click)="setList('PERSONAL-CARE')" color="accent" selected>Personal Care</mat-chip>
         </mat-chip-list>
     </div>
     <div class="  mt-4 mb-4 ml-4  col-lg-3">
@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="list col-12">
-    <mat-card class="card col-lg-4"  *ngFor="let product of products; let i=index" [class.mat-elevation-z3]="true">
+    <mat-card class="card col-lg-4"  *ngFor="let product of productsList; let i=index" [class.mat-elevation-z3]="true">
         <img mat-card-image [src]="product.imageUrl"  (error)="imgErrorHandler($event)" alt="">
         <mat-card-content>
             <mat-card-title>{{product.name}}</mat-card-title>
@@ -21,7 +21,7 @@
             <p>{{product.description}}</p>
         </mat-card-content>
         <mat-card-actions class="action">
-            <span class="price inline-block">₹&nbsp;{{product.price}}</span>
+            <span class="price inline-block">₹&nbsp;{{product.price| number}}</span>
             <span *ngIf="!itemQtyMap.has(product.id) && isLoggedCustomer">
                 <button [disabled]="isRequest" class="btn btn-light btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
             </span>

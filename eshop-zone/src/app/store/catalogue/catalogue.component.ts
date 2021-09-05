@@ -33,6 +33,7 @@ export class CatalogueComponent implements OnInit {
   
   itemQtyMap= new Map();  
   products: Product[] = [];
+  productsList: Product[] = [];
   cart:Cart= <Cart>{};
   isRequest:boolean=false;
   isLoggedCustomer:boolean=false
@@ -46,21 +47,26 @@ export class CatalogueComponent implements OnInit {
     event.target.src = './assets/img/altImg.png';
   }
 
+  setList(category:string){
+    if(category=="All"){
+      this.productsList=this.products;
+    }
+    else{
+      this.productsList= this.products.filter(x =>{
+        return x.category == category
+      })
+    }
+  }
+
   getAllProducts(): void {
     this.isRequest=true;
     this.catalogueService.getAllProducts()
-      .subscribe(data => this.products = data);
+      .subscribe(data => {
+        this.products = data
+        this.setList("All");
+      });
       this.isRequest=false;
       this.getCart();
-  }
-
-  getByCategory(category: string): void {
-    this.isRequest=true;
-    this.catalogueService.getByCategory(category)
-      .subscribe(data => this.products = data);
-
-      this.getCart();
-      this.isRequest=false;
   }
 
   getCart(): void {

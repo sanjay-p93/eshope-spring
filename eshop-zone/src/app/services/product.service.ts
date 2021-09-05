@@ -17,8 +17,7 @@ export class ProductService {
   };
 
   constructor(
-    private http: HttpClient,
-    private localstorageService: LocalstorageService
+    private http: HttpClient
   ) { }
 
   saveProduct(product:Product): Observable<Product> {

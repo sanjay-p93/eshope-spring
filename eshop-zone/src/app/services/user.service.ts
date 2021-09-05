@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,10 +20,23 @@ export class UserService {
   private isLoggedIn = new Subject<boolean>();
   isLoggedIn$ =this.isLoggedIn.asObservable();
   
-  constructor(private http: HttpClient,
-    private router: Router
-  ) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ){}
 
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  snackBar(mesage:string){
+    this._snackBar.open(mesage, 'close', {
+      duration: 2 * 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
 
   getUserDetails(email : string): Observable<User> {
     let url: string= this.userUrl+"user/"+email;
@@ -41,6 +55,7 @@ export class UserService {
   logOut(){
     localStorage.clear();
     this.isLoggedIn.next(false);
+    this.snackBar("You have been logged out");
     this.router.navigate(['home']);
   }
 

@@ -4,7 +4,6 @@ import { User } from 'src/app/models/user';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
 import { OrderService } from 'src/app/services/order.service';
-import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -18,23 +17,40 @@ export class OrderListComponent implements OnInit {
   constructor(
     private orderService:OrderService,
     private localstorageService: LocalstorageService,
-    private userService:UserService,
     private navBarService:NavBarService
   ) { }
 
   user?:User;
   orders:Order[]=[];
+  orderList:Order[]=[];
+  status:string="";
+
+  setList(status:string){
+    this.status=status;
+    if(this.status.length==0){
+      this.orderList=this.orders;
+    }
+    else{
+      this.orderList= this.orders.filter(order =>{
+        return order.orderStatus == this.status
+      })
+    }
+  }
 
   getOrders(){
     if(this.user?.role == "ADMIN"){
         this.orderService.getall().subscribe(
-          orderList=>this.orders=orderList.reverse()
-        );
+          orderList=>{
+            this.orders=orderList.reverse();
+            this.setList("");
+        });
     }
     else{
       this.orderService.getUserOrder().subscribe(
-        orderList=>this.orders=orderList.reverse()
-      );
+        orderList=>{
+          this.orders=orderList.reverse();
+          this.setList("");
+      });
     }
   }
 
