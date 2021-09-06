@@ -11,7 +11,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  private userUrl = 'http://localhost:8080/users/'; 
+  public userUrl = 'http://localhost:8080/users/'; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

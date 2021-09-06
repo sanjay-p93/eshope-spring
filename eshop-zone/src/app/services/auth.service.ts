@@ -12,8 +12,8 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  private signinUrl = 'http://localhost:8080/eshop/authenticate';
-  private signupUrl = 'http://localhost:8080/eshop/signup'; 
+  public signinUrl = 'http://localhost:8080/eshop/authenticate';
+  public signupUrl = 'http://localhost:8080/eshop/signup'; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
