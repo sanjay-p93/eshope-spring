@@ -58,7 +58,7 @@ describe('UserService', () => {
     });
 
     //Test case 1
-    it('should return expected product by passing id', () => {
+    it('should return expected user by passing email', () => {
       service.getUserDetails(email).subscribe(
         data => expect(data).toEqual(expectedUser, 'should return expected user'),
         fail

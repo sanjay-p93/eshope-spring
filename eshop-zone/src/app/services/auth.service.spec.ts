@@ -87,7 +87,7 @@ describe('AuthService', () => {
     });
 
     //Test case 1
-    it('should return expected product by passing id', () => {
+    it('should return user by passing user details', () => {
       service.signUp(expectedUser).subscribe(
         data => expect(data).toEqual(expectedUser, 'should update and return user'),
         fail
