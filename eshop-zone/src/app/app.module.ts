@@ -16,12 +16,16 @@ import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { HeaderIntercepterService } from './services/header-intercepter.service';
 import { ErrorComponent } from './error/error.component';
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+import { AlertDialogComponent } from './shared/alert-dialog/alert-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    ErrorComponent
+    ErrorComponent,
+    ConfirmationDialogComponent,
+    AlertDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@ import {
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-catalogue',
@@ -27,7 +29,8 @@ export class CatalogueComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private navBarService:NavBarService,
     private localstorageService: LocalstorageService,
-    private userService:UserService
+    private userService:UserService,
+    public dialog: MatDialog
     
   ) { }
   
@@ -109,14 +112,26 @@ export class CatalogueComponent implements OnInit {
   }
 
   removeFromCart(item: Product):void{
-    this.isRequest=true;
-    let thisCartItem:CartItem=Object.assign({quantity: 0}, item);
-    this.cartService.deleteItem(thisCartItem).subscribe(result=>{
-      this.cart=result;
-      this.setQtyMap();
-      this.isRequest=false;
-      this.snackBar(item.name+" is removed from cart");
-    })
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm',
+        content:`Are you sure you want to remove ${item.name} from cart.`
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
+      }
+      this.isRequest=true;
+      let thisCartItem:CartItem=Object.assign({quantity: 0}, item);
+      this.cartService.deleteItem(thisCartItem).subscribe(result=>{
+        this.cart=result;
+        this.setQtyMap();
+        this.isRequest=false;
+        this.snackBar(item.name+" is removed from cart");
+      })
+    });
   }
 
 

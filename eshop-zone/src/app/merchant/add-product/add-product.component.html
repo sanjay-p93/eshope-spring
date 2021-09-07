@@ -21,7 +21,10 @@
                     <label class="control-label text-secondary">Description</label>
                     <input [class.is-invalid]="productForm.get('description')?.invalid && productForm.get('description')?.touched " 
                         formControlName="description" type="text" class="form-control" >
-                    <small *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">Description is required</small>
+                    <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched">
+                        <small *ngIf="productForm.get('description')?.errors?.required" class="text-danger">Description is required</small>
+                        <small *ngIf="productForm.get('description')?.errors?.maxlength" class="text-danger">Max 100 characters allowed</small>
+                    </div>
                 </div>
                 <div class="form-group col-md-10">
                     <label class="control-label text-secondary">Price</label>

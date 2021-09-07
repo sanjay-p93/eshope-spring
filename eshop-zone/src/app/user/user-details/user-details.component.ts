@@ -20,8 +20,8 @@ export class UserDetailsComponent implements OnInit {
     private router: Router
   ) { }
 
-  userForm!: FormGroup;
   user!:User;
+  userForm!: FormGroup;
   isEdit:boolean=false;
 
   createform(){
@@ -42,10 +42,9 @@ export class UserDetailsComponent implements OnInit {
 
   }
 
-  setUserDetails(user:User){
-
+  setUserDetails(){
     this.userForm.enable();
-    this.userForm.patchValue(user);
+    this.userForm.patchValue(this.user);
     this.userForm.disable();
   }
 
@@ -56,7 +55,7 @@ export class UserDetailsComponent implements OnInit {
   }
   cancel(){
     this.isEdit=false;
-    this.userForm.disable();
+    this.setUserDetails();
   }
 
   save(){
@@ -69,28 +68,27 @@ export class UserDetailsComponent implements OnInit {
     const loggedUser=this.localstorageService.getUser();
     const user  = Object.assign({id:loggedUser?.id,password:loggedUser?.password},formValue);
     this.userService.updateDetails(user).subscribe(result=>{
-      this.setUserDetails(result);
+      this.user=user;
+      this.setUserDetails();
       localStorage.setItem('eshopZoneUser', JSON.stringify(result));
       
     });
   }
 
+  getUserDetails(email?:string){
+    if(!email){
+      return;
+    }
+    this.userService.getUserDetails(email).subscribe(user=>{
+      this.user=user;
+      this.setUserDetails();
+    })
+  }
   
   ngOnInit(): void {
     this.createform();
-
     const email=this.localstorageService.getUser()?.email;
-    if(email){
-      this.userService.getUserDetails(email).subscribe(user=>{
-        this.setUserDetails(user);
-      })
-    }
-    else{
-      this.localstorageService.clear();
-      this.router.navigate(['home']);
-    }
-
-    
+    this.getUserDetails(email);
   }
 
 }

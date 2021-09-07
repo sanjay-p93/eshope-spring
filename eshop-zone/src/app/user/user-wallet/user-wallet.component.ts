@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Wallet } from 'src/app/models/wallet';
 import { WalletService } from 'src/app/services/wallet.service';
+import { AlertDialogComponent } from 'src/app/shared/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-user-wallet',
@@ -10,7 +12,8 @@ import { WalletService } from 'src/app/services/wallet.service';
 export class UserWalletComponent implements OnInit {
 
   constructor(
-    private walletService:WalletService
+    private walletService:WalletService,
+    public dialog: MatDialog
   ) { }
   
   wallet!:Wallet;
@@ -42,7 +45,12 @@ export class UserWalletComponent implements OnInit {
 
   add(){
     if(this.amount<0){
-      alert("Invalid entry");
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Warning',
+          content:`Invalid entry.`
+        }
+      });
       return;
     }
     this.walletService.createOrTopUP(this.amount,"add").subscribe(result=>{
@@ -54,7 +62,12 @@ export class UserWalletComponent implements OnInit {
 
   topup(){
     if(this.amount<1){
-      alert("Please add an amount greater than zero");
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Warning',
+          content:`Please add an amount greater than zero.`
+        }
+      });
       return;
     }
     this.walletService.createOrTopUP(this.amount,"topup").subscribe(result=>{

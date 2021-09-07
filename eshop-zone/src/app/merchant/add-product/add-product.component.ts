@@ -41,7 +41,7 @@ export class AddProductComponent implements OnInit {
   createForm(){
     this.productForm = this.fb.group({
       name:                 ["",[Validators.required,Validators.maxLength(25)]],
-      description :         ["",Validators.required],
+      description :         ["",[Validators.required,Validators.maxLength(100)]],
       price :               ["",[Validators.required,Validators.pattern("^[0-9]{1,5}$")]],
       category :            ["",[Validators.required]],
       imageUrl :            [""]

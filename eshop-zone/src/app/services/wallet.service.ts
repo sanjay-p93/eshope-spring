@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { TopUp } from '../models/topUp';
 import { Wallet } from '../models/wallet';
+import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.component';
 import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
@@ -20,7 +22,8 @@ export class WalletService {
 
   constructor(
     private http: HttpClient,
-    private localstorageService: LocalstorageService
+    private localstorageService: LocalstorageService,
+    public dialog: MatDialog
   ) { }
 
   getWallet(): Observable<Wallet> {
@@ -49,16 +52,21 @@ export class WalletService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
+ 
+      let message=`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`;
       if(error.status==403){
-        alert("You are not authorized to do this action");
+        message=`You are not authorized to do this action.`
       }
       else if(typeof(error.error)=="string"){
-        alert(error.error);
+        message=error.error;
       }
-      else{
-        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
-      }
-
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Error',
+          content:message
+        }
+      });
+      
       console.error(error.error); 
       console.log(`${operation} failed : ${error.message}`);
 

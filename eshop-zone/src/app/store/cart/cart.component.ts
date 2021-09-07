@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Cart } from 'src/app/models/cart';
 import { CartItem } from 'src/app/models/cartItem';
 import { CartService } from 'src/app/services/cart.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +17,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService:CartService,
     private navBarService:NavBarService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) { }
   cart!:Cart;
   isDisabled:boolean=false;
@@ -49,19 +52,30 @@ export class CartComponent implements OnInit {
     if(this.isDisabled){
       return;
     }
-    this.isDisabled=true;
-    this.cartService.deleteItem(item).subscribe(data=>{
-      this.cart=data;
-      if(this.cart){
-        this.snackBar(item.name+" is removed from cart");
-        this.navBarService.setItemCount(this.cart.items.length);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm',
+        content:`Are you sure you want to remove ${item.name} from cart.`
       }
-      else{
-        this.snackBar(item.name+" is removed from cart");
-        this.navBarService.setItemCount(0);
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
       }
-      this.isDisabled=false;
-    })
+      this.isDisabled=true;
+      this.cartService.deleteItem(item).subscribe(data=>{
+        this.cart=data;
+        if(this.cart){
+          this.snackBar(item.name+" is removed from cart");
+          this.navBarService.setItemCount(this.cart.items.length);
+        }
+        else{
+          this.snackBar(item.name+" is removed from cart");
+          this.navBarService.setItemCount(0);
+        }
+        this.isDisabled=false;
+      })
+    });
   }
 
 
@@ -93,7 +107,9 @@ export class CartComponent implements OnInit {
   }
 
   stepDown(idx:number,item:CartItem){
-
+    if(this.isDisabled){
+      return;
+    }
     if(item.quantity<2){
       this.removeFromCart(item);
       return;
@@ -103,6 +119,10 @@ export class CartComponent implements OnInit {
   }
 
   stepUp(idx:number,item:CartItem){
+
+    if(this.isDisabled){
+      return;
+    }
     if(item.quantity>=10){
       this.snackBar("Maximum allowed quantity is 10 number per item");
       return;

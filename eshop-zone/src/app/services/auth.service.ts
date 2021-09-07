@@ -1,11 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable ,of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { JWTRequest } from '../models/JWTRequest';
 import { JWTRespone } from '../models/JWTRespone';
 import { User } from '../models/user';
+import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,10 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog
+  ) { }
 
   signIn(jwtReq : JWTRequest): Observable<JWTRespone> {
     return this.http.post<JWTRespone>(this.signinUrl,jwtReq,this.httpOptions)
@@ -38,15 +43,21 @@ export class AuthService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      
+      let message=`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`;
       if(error.status==403){
-        alert("Invalid credentials");
+        message=`Invalid credentials.`
       }
       else if(typeof(error.error)=="string"){
-        alert(error.error);
+        message=error.error;
       }
-      else{
-        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
-      }
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Error',
+          content:message
+        }
+      });
+      
       console.error(error.error); 
       console.log(`${operation} failed : ${error.message}`);
 

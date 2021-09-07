@@ -1,0 +1,6 @@
+<h2 md-dialog-title>{{data.title}}</h2>
+<mat-dialog-content>{{data.content}}</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="btn btn-light btn-sm mr-2" mat-dialog-close>Cancel</button>
+    <button class="btn btn-dark btn-sm" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+</mat-dialog-actions>

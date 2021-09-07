@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { Product } from '../models/product';
 import { Observable, of} from 'rxjs';
 import { catchError} from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class CatalogueService {
 
   public catalogueUrl = 'http://localhost:8080/catalogue/';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog
+  ) { }
 
   getAllProducts(): Observable<Product[]> {
     let getAllUrl: string= this.catalogueUrl+"products";   

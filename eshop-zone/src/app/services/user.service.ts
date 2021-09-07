@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../models/user';
+import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,8 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ){}
 
 
@@ -65,15 +68,21 @@ export class UserService {
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+    
+      let message=`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`;
       if(error.status==403){
-        alert("You are not authorized to do this action");
+        message=`You are not authorized to do this action.`
       }
       else if(typeof(error.error)=="string"){
-        alert(error.error);
+        message=error.error;
       }
-      else{
-        alert(`Oops something went wrong at Eshop-Zone, ${operation} failed. Try again after sometime.`);
-      }
+      const dialogRef = this.dialog.open(AlertDialogComponent, {
+        data: {
+          title: 'Error',
+          content:message
+        }
+      });
+      
       console.error(error); 
       console.log(`${operation} failed : ${error.message}`);
 

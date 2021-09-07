@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { JWTRequest } from 'src/app/models/JWTRequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
 import { UserService } from 'src/app/services/user.service';
+import { AlertDialogComponent } from 'src/app/shared/alert-dialog/alert-dialog.component';
 import { PasswordValidator } from 'src/app/shared/password.validator';
 
 @Component({
@@ -20,7 +22,8 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private navBarService:NavBarService,
     private authService:AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
     ) { }
 
   signupForm!: FormGroup;
@@ -64,7 +67,12 @@ export class SignupComponent implements OnInit {
         }
         else{
           localStorage.clear();
-          alert("You have been succesfully registered try logging in.");
+          const dialogRef = this.dialog.open(AlertDialogComponent, {
+            data: {
+              title: 'Alert',
+              content:`You have been succesfully registered try logging in.`
+            }
+          });
           this.router.navigate(['signin']);
         }
     });

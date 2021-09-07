@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Order } from 'src/app/models/order';
 import { User } from 'src/app/models/user';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { NavBarService } from 'src/app/services/nav-bar.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 
 
@@ -17,7 +19,8 @@ export class OrderListComponent implements OnInit {
   constructor(
     private orderService:OrderService,
     private localstorageService: LocalstorageService,
-    private navBarService:NavBarService
+    private navBarService:NavBarService,
+    public dialog: MatDialog
   ) { }
 
   user?:User;
@@ -57,16 +60,46 @@ export class OrderListComponent implements OnInit {
   }
 
   complete(order:Order){
-    this.orderService.completeOrder(order.id).subscribe(order=>{
-      console.log(order);
-      this.getOrders();
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm',
+        content:`Are you sure you want to mark order #${order.id} as completed.`
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
+      }
+      this.orderService.completeOrder(order.id).subscribe(order=>{
+        console.log(order);
+        this.getOrders();
+      });
     });
   }
 
   cancel(order:Order){
-    this.orderService.cancelOrder(order.id).subscribe(order=>{
-      console.log(order);
-      this.getOrders();
+
+    let message ="";
+    if(this.user?.role=="ADMIN"){
+      message=`Are you sure you want to reject order #${order.id}.`;
+    }
+    else{
+      message=`Are you sure you want to cancel order #${order.id}.`;
+    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Confirm',
+        content: message
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(!result){
+        return;
+      }
+      this.orderService.cancelOrder(order.id).subscribe(order=>{
+        console.log(order);
+        this.getOrders();
+      });
     });
   }
 
