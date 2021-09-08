@@ -5,14 +5,13 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../models/product';
 import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.component';
-import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private productUrl = 'http://localhost:8080/product/';
+  private productUrl = 'http://localhost:8080/product-service/product/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CatalogueService {
 
-  public catalogueUrl = 'http://localhost:8080/catalogue/';
+  public catalogueUrl = 'http://localhost:8080/catalogue-service/catalogue/';
 
   constructor(
     private http: HttpClient,

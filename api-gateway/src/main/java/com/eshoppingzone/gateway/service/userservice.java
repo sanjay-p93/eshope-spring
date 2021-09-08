@@ -30,7 +30,7 @@ public class userservice implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		try {
-			String uri = "http://localhost:8081/users/user/" + username;
+			String uri = "http://USER-SERVICE/users/user/" + username;
 			user currentUser = restTemplate.getForObject(uri, user.class);
 			if (currentUser == null) {
 				throw new UsernameNotFoundException("User not found");

@@ -13,7 +13,7 @@ import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.compon
 })
 export class UserService {
 
-  public userUrl = 'http://localhost:8080/users/'; 
+  public userUrl = 'http://localhost:8080/user-service/users/'; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

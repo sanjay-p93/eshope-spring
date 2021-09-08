@@ -12,7 +12,7 @@ import { LocalstorageService } from './localstorage.service';
 })
 export class OrderService {
 
-  private orderUrl = 'http://localhost:8080/orders/';
+  private orderUrl = 'http://localhost:8080/cart-service/orders/';
   
   constructor(
     private http: HttpClient,

@@ -1,11 +1,6 @@
 package com.eshoppingzone.gateway.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(value = "Users")
 public class user {
-	@Id
 	private String id;
 	private String name;
 	private String phone;

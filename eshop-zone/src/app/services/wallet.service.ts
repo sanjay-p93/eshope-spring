@@ -14,7 +14,7 @@ import { LocalstorageService } from './localstorage.service';
 export class WalletService {
 
 
-  private walletUrl = 'http://localhost:8080/wallet/';
+  private walletUrl = 'http://localhost:8080/wallet-service/wallet/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

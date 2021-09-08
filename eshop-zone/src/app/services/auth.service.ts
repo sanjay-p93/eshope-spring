@@ -15,7 +15,7 @@ import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.compon
 export class AuthService {
 
   public signinUrl = 'http://localhost:8080/eshop/authenticate';
-  public signupUrl = 'http://localhost:8080/eshop/signup'; 
+  public signupUrl = 'http://localhost:8080/user-service/users/signup'; 
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
