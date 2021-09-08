@@ -92,7 +92,7 @@ export class EditProductComponent implements OnInit {
       this.product=data;
       this.setProductDetails();
       this.cancelEdit();
-      this.snackBar("Product details updated");
+      this.snackBar(`Details updated for ${data.name}`);
 
     })
 

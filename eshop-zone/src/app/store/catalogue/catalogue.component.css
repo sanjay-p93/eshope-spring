@@ -1,7 +1,7 @@
 .card {
   max-width: 275px;
   max-height: 390px;
-  margin: 10px 3px;
+  margin: 10px 16px;
   display: inline-block;
 }
 img {
@@ -27,6 +27,28 @@ button{
   font-weight: bold;
   font-size: 18px;
 }
+.product-container{
+  padding-left: 12px;
+}
+mat-drawer{
+  width: 190px;
+}
+mat-drawer-content{
+  min-height: 100vh;
+  padding: 5px auto;
+  background-color: white;
+}
+mat-drawer-container{
+  min-height: 100vh;
+}
+.side-nav:focus{
+  outline: none !important;
+  background-color: rgb(196, 194, 194);
+
+}
+
+
+
 
 
 @media screen and (max-width: 580px) {

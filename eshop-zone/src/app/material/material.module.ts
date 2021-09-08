@@ -17,6 +17,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 const material =
@@ -37,7 +38,8 @@ const material =
     MatChipsModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule
     
     
   ];

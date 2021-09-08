@@ -59,7 +59,7 @@ export class AddProductComponent implements OnInit {
     this.productService.saveProduct(newProduct).subscribe(data=>{
       console.log(data);
       if(data){
-        this.snackBar("New product added");
+        this.snackBar(`${data.name} added`);
         this.router.navigate(['merchant']);
       }
       this.product=data;

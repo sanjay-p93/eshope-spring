@@ -1,33 +1,51 @@
-<div class="row">
-    <div class=" mt-4 mb-4 ml-4 col-lg-8">
-        <mat-chip-list aria-label="Fish selection">
-            <mat-chip (click)="setList('All')" color="accent" selected>All</mat-chip>
-            <mat-chip (click)="setList('BOOKS')" color="accent" selected>Books </mat-chip>
-            <mat-chip (click)="setList('ELECTRONICS')" color="accent" selected>Electronics</mat-chip>
-            <mat-chip (click)="setList('APPAREL')" color="accent" selected>Apparel</mat-chip>
-            <mat-chip (click)="setList('PERSONAL-CARE')" color="accent" selected>Personal Care</mat-chip>
-        </mat-chip-list>
-    </div>
-    <div class="  mt-4 mb-4 ml-4  col-lg-3">
-        <!-- search-->
-    </div>
-</div>
-<div class="list col-12">
-    <mat-card class="card col-lg-4"  *ngFor="let product of productsList; let i=index" [class.mat-elevation-z3]="true">
-        <img mat-card-image [src]="product.imageUrl"  (error)="imgErrorHandler($event)" alt="">
-        <mat-card-content>
-            <mat-card-title>{{product.name}}</mat-card-title>
-            <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
-            <p>{{product.description}}</p>
-        </mat-card-content>
-        <mat-card-actions class="action">
-            <span class="price inline-block">₹&nbsp;{{product.price| number}}</span>
-            <span *ngIf="!itemQtyMap.has(product.id) && isLoggedCustomer">
-                <button [disabled]="isRequest" class="btn btn-light btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
-            </span>
-            <span *ngIf="itemQtyMap.has(product.id) && isLoggedCustomer">
-                <button [disabled]="isRequest" (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
-            </span>
-        </mat-card-actions>
-    </mat-card>
-</div>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+            <h2 class="text-muted  ml-3 mt-4">Categories</h2>
+            <button class="side-nav" (click)="setList('All')" mat-menu-item>
+                <mat-icon>list</mat-icon>
+                <span>All </span>
+            </button>
+            <button  class="side-nav" (click)="setList('BOOKS')" mat-menu-item>
+                <mat-icon>library_books</mat-icon>
+                <span>Books</span>
+            </button>
+            <button  class="side-nav" (click)="setList('APPAREL')"  mat-menu-item >
+                <mat-icon>favorite</mat-icon>
+                <span>Apparel</span>
+            </button>
+            <button  class="side-nav" (click)="setList('ELECTRONICS')" mat-menu-item>
+                <mat-icon>devices_other</mat-icon>
+                <span>Electronics</span>
+            </button>
+            <button  class="side-nav" (click)="setList('PERSONAL-CARE')"  mat-menu-item>
+                <mat-icon>card_giftcard</mat-icon>
+                <span>Personal Care</span>
+            </button>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="">
+        </div>
+        <div class="product-container mt-4">
+            <div class="list col-12 p-0">
+                <mat-card class="card col-lg-4"  *ngFor="let product of productsList; let i=index" [class.mat-elevation-z3]="true">
+                    <img mat-card-image [src]="product.imageUrl"  (error)="imgErrorHandler($event)" alt="">
+                    <mat-card-content>
+                        <mat-card-title>{{product.name}}</mat-card-title>
+                        <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+                        <p>{{product.description}}</p>
+                    </mat-card-content>
+                    <mat-card-actions class="action">
+                        <span class="price inline-block">₹&nbsp;{{product.price| number}}</span>
+                        <span *ngIf="!itemQtyMap.has(product.id) && isLoggedCustomer">
+                            <button [disabled]="isRequest" class="btn btn-light btn-sm" (click)="addToCart(product)" mat-button><mat-icon>add_shopping_cart</mat-icon></button>
+                        </span>
+                        <span *ngIf="itemQtyMap.has(product.id) && isLoggedCustomer">
+                            <button [disabled]="isRequest" (click)="removeFromCart(product)" type="button" class="btn btn-danger btn-sm">Remove</button>
+                        </span>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
