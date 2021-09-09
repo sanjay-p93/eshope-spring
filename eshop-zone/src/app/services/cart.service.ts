@@ -19,7 +19,7 @@ import { LocalstorageService } from './localstorage.service';
 export class CartService {
 
 
-  private cartUrl = 'http://localhost:8080/cart-service/cart/';
+  public cartUrl = 'http://localhost:8080/cart-service/cart/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

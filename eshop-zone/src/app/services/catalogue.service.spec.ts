@@ -5,6 +5,7 @@ import { TestBed } from '@angular/core/testing';
 import { Product } from '../models/product';
 
 import { CatalogueService } from './catalogue.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 describe('CatalogueService', () => {
   let service: CatalogueService;
@@ -13,7 +14,9 @@ describe('CatalogueService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        MatDialogModule],
       providers: [
         CatalogueService
       ]

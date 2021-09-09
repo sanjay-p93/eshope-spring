@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { User } from '../models/user';
 import { JWTRequest } from '../models/JWTRequest';
 import { JWTRespone } from '../models/JWTRespone';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -18,7 +19,7 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule,
         RouterTestingModule.withRoutes([]), 
-        MatSnackBarModule ],
+        MatSnackBarModule,MatDialogModule ],
       providers: [
         AuthService
       ]
@@ -55,7 +56,7 @@ describe('AuthService', () => {
       const req = httpTestingController.expectOne(service.signinUrl);
       expect(req.request.method).toEqual('POST');
   
-      // Expect server to return the employee after POST
+      // Expect server to return the usere after POST
       const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: expectedJWTRespone });
       req.event(expectedResponse);
     });

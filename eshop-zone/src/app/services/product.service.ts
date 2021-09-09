@@ -11,7 +11,7 @@ import { AlertDialogComponent } from '../shared/alert-dialog/alert-dialog.compon
 })
 export class ProductService {
 
-  private productUrl = 'http://localhost:8080/product-service/product/';
+  public productUrl = 'http://localhost:8080/product-service/product/';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

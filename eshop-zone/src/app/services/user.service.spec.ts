@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from './user.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Address } from '../models/address';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('UserService', () => {
   let service: UserService;
@@ -17,7 +18,7 @@ describe('UserService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule,
         RouterTestingModule.withRoutes([]), 
-        MatSnackBarModule ],
+        MatSnackBarModule, MatDialogModule ],
       providers: [
         UserService
       ]
@@ -105,7 +106,7 @@ describe('UserService', () => {
       expect(req.request.method).toEqual('POST');
       expect(req.request.body).toEqual(expectedUser);
   
-      // Expect server to return the employee after POST
+      // Expect server to return the user after POST
       const expectedResponse = new HttpResponse({ status: 201, statusText: 'Created', body: expectedUser });
       req.event(expectedResponse);
     });
